@@ -1,0 +1,8 @@
+.delete {
+    background-color: hsl(var(--clr-delete-btn));
+    color: #FFF;
+}
+
+.delete:hover {
+    background-color: hsl(var(--clr-delete-hover));
+}

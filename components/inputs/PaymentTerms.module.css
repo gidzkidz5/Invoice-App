@@ -1,0 +1,19 @@
+#paymentTerms {
+    width: 240px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    padding-inline: 1.25rem;
+    font-family: var(--ff-spartan);
+}
+
+#paymentTerms.light{
+    border: 1px solid hsl(var(--clr-whitegreypurple));
+    background-color: #FFF;
+    cursor: pointer;
+}
+
+#paymentTerms:hover.light{
+    border: 1px solid #7C5DFA;
+    background-color: #FFF;
+}

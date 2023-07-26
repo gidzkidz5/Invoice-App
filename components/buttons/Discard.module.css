@@ -1,0 +1,8 @@
+.discard {
+    background-color: #F9FAFE;
+    color: #7E88C3;
+}
+
+.discard:hover {
+    background-color: #DFE3FA;
+}

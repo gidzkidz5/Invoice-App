@@ -1,0 +1,63 @@
+.title {
+    color: hsl(var(--clr-purple-btn));
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.form {
+    background-color: #FFF;
+}
+
+.noArrow::-webkit-inner-spin-button,
+.noArrow::-webkit-outer-spin-button
+ {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.header {
+    margin-top: 59px;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.parent {
+    display: flex;
+    gap: 1.5rem;
+}
+.child {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.itemList {
+    display: grid;
+    grid-template-columns: 0.42fr 0.091fr 0.2fr 0.17fr;
+    column-gap: 1rem;
+
+    grid-auto-rows: minmax(30px, auto);
+ 
+}
+
+.itemList label{
+    margin-bottom: 15px;
+}
+
+.itemListInput {
+    width: 100%;
+    max-width: fit-content;
+}
+
+.btnContainer {
+    display:flex;
+    justify-content: space-between;
+    margin-top: 2.5rem;
+}
+
+.btnChild {
+    display: flex;
+    gap: 8px;
+}

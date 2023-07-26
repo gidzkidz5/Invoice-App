@@ -1,0 +1,18 @@
+.main {
+    border-radius: 4px;
+    width: 240px;
+    height: 48px;
+    display: flex;
+    padding-inline: 20px 16px;
+}
+
+.main.light {
+    color: hsl(var(--clr-black));
+    border: 1px solid hsl(var(--clr-whitegreypurple));
+    background: #FFF;
+    cursor: pointer;
+}
+
+.main:hover.light {
+    border-color: #7C5DFA;
+}

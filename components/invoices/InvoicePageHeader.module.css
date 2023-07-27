@@ -1,0 +1,20 @@
+.main {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.textmain {
+    display: flex;
+    flex-direction: column;
+}
+
+.textmain p {
+    color: #888EB0;
+}
+
+.uimain {
+    display: flex;
+
+    align-items: center;
+}

@@ -1,7 +1,12 @@
+import AddNewInvoiceBtn from "../buttons/AddNewInvoiceBtn";
+import AddNewItem from "../buttons/AddNewItem";
 import Delete from "../buttons/Delete";
 import Discard from "../buttons/Discard";
+import Edit from "../buttons/Edit";
+import MarkPaid from "../buttons/MarkPaid";
 import { SaveDraftButton, SaveSendButton } from "../buttons/Save";
 import DatePicker from "../inputs/DatePicker";
+import FilterStatus from "../inputs/FilterStatus";
 import PaymentTerms from "../inputs/PaymentTerms";
 import styles from "./NewInvoice.module.css";
 
@@ -11,6 +16,7 @@ export default function NewInvoice() {
     }
   return (
     <form className={styles.form}>
+    
       <div className="ff-sanserif">
         <h1 className={`${styles.header} fs-M`}>New Invoice</h1>
 
@@ -73,6 +79,8 @@ export default function NewInvoice() {
             </div>
           </div>
 
+    
+
           <div className={`${styles.parent}`}>
             <DatePicker />
             <PaymentTerms />
@@ -95,11 +103,12 @@ export default function NewInvoice() {
             <label className="fs-body" htmlFor="total">Total</label>
             
             
-            <input className={`${styles.itemListInput} light fs-S2`} type="text" />
-            <input className={`${styles.noArrow} light fs-S2`} type="number" />
-            <input className={`${styles.noArrow} light fs-S2`} type="number"  />
+            <input className={`${styles.itemListInput} light fs-S2`} type="text" id="itemName"/>
+            <input className={`${styles.noArrow} light fs-S2`} type="number" id="quantity"/>
+            <input className={`${styles.noArrow} light fs-S2`} type="number" id="price" />
             <div>154</div>
           </div>
+          <AddNewItem/>
         </div>
       </div>
       <div className={`${styles.btnContainer}`}>
@@ -111,7 +120,9 @@ export default function NewInvoice() {
             <SaveSendButton />
         </div>
       </div>
-      <Delete/>
+     
+   
+     
     </form>
     
   );

@@ -1,0 +1,17 @@
+.btn {
+    background-color: #F9FAFE;
+    color: #7E88C3;
+    text-align: center;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-inline: 24px;
+
+}
+
+.btn:hover {
+    background-color: #DFE3FA;
+}
+

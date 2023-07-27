@@ -1,0 +1,50 @@
+.main {
+    display: flex;
+    padding-inline: 30px;
+    padding-block: 14px 11px;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 6px;
+    
+
+}
+
+.paid {
+    background-color: hsla(160, 67%, 52%, 0.0570882);
+    color: hsla(160, 67%, 52%, 1);
+}
+
+.pending {
+    background: hsla(34, 100%, 50%, 0.0570882);
+    color: hsla(34, 100%, 50%, 1)
+}
+
+.draft {
+    background-color: hsla(231, 20%, 27%, 0.0570882);
+    color: hsla(231, 20%, 27%, 1);
+}
+
+.circle {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+}
+
+.circle.paid {
+    background-color: hsla(160, 67%, 52%, 1);
+}
+
+.circle.pending {
+    background: hsla(34, 100%, 50%, 1);
+}
+
+.circle.draft {
+    background-color: hsla(231, 20%, 27%, 1);
+}
+
+
+.status {
+    opacity: 1.0;
+    font-weight: 700;
+}

@@ -1,10 +1,10 @@
 import styles from "./MarkPaid.module.css";
 
-export default function MarkPaid() {
+export default function MarkPaid(props) {
   return (
-    <button className={`${styles.btn} ff-sanserif flex ff-S2`}>
+    <button className={`${styles.btn} ff-sanserif flex ff-S2`} onClick={props.onClick}>
       
-      Mark as Paid
+      Mark as {props.status === 'Pending' ? "Paid" : "Pending"}
     </button>
   );
 }

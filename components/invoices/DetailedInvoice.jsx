@@ -4,8 +4,59 @@ import Edit from '../buttons/Edit'
 import MarkPaid from '../buttons/MarkPaid'
 import styles from './DetailedInvoice.module.css'
 import InvoiceStatus from './InvoiceStatus'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
 export default function DetailedInvoice(props) {
+    const router = useRouter();
+    const path = router.query.id;
+    
+    console.log(props.status.toLowerCase(),"1st")
+    const [wantedStatus, setWantedStatus] = useState(props.status.toLowerCase());
+
+    function changeStatus() {
+        if (wantedStatus.toLowerCase() === "paid") {
+            setWantedStatus("pending")
+        } else {
+            setWantedStatus("paid")
+        }
+    }
+
+    function handleClick () {
+        // useEffect(()=> {
+        //     async function postData() {
+        //         const update = await 
+        //     }
+        // })
+        changeStatus();
+        console.log(wantedStatus, "wantedStatus")
+       
+        // router.push(`/invoices/${path}`)
+
+        return
+    }
+
+    useEffect(() => {
+        if (wantedStatus !== props.status.toLowerCase()) {
+            fetch(`/api/invoices/${path}`,{
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(wantedStatus)
+                
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("inside fetch")
+                console.log(data); //Updated resource response
+                window.location.reload();
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        }
+    },[wantedStatus, path, props.status])
 
     return (
         <div className={`${styles.main} ff-sanserif`}>
@@ -19,7 +70,10 @@ export default function DetailedInvoice(props) {
                 <div className={`${styles.btnContainer}`}>
                     <Edit/>
                     <Delete/>
-                    <MarkPaid/>
+                    <MarkPaid
+                        status={props.status}
+                        onClick={handleClick}
+                    />
                 </div>
             </section>
             <section className={`${styles.detailsParent} ff-sanserif`}>

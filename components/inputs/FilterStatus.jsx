@@ -1,17 +1,24 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./FilterStatus.module.css";
 import { Checkbox } from "@mui/material";
 
 
-export default function FilterStatus() {
+export default function FilterStatus(props) {
   const [dropdown, setDropdown] = useState(false);
+  const [checked, setChecked] = useState([false, false ,false])
 
   function rotateArrow() {
-    
     setDropdown(!dropdown);
-    
-   
   }
+
+  function handleCheckboxChange(index) {
+    console.log(index)
+    setChecked(
+      checked.map((isChecked, i) => (i === index ? !isChecked : isChecked))
+    )
+    props.onCheckboxChange(index)
+  }
+
   return (
     <div className={`${styles.parent}`}>
       <div
@@ -36,8 +43,13 @@ export default function FilterStatus() {
       </div>
       <div className={`${styles.dropdownParent}`}>
      <div className={dropdown ? `${styles.dropdown} ff-sanserif fs-S2` : `${styles.dropdownClose} ff-sanserif fs-S2`}>
-        <div className={`${styles.input}`}>
+        <div className={`${styles.input}`} >
           <Checkbox
+            key="1"
+            // checked={checkedboxRef.current[1] || false}
+            // onChange={()=> (handleCheckboxChange(1))}
+            checked={checked[0]}
+            onChange={() => handleCheckboxChange(0)}
             sx={{
               color: "#DFE3FA",
               "&.Mui-checked": {
@@ -48,8 +60,12 @@ export default function FilterStatus() {
           <label>Draft</label>
         </div>
 
-        <div className={`${styles.input}`}>
+        <div className={`${styles.input}`} >
           <Checkbox
+            key="2"
+            // checked={checkedboxRef.current[2] || false}
+            checked={checked[1]}
+            onChange={()=> (handleCheckboxChange(1))}
             sx={{
               color: "#DFE3FA",
               "&.Mui-checked": {
@@ -62,6 +78,10 @@ export default function FilterStatus() {
 
         <div className={`${styles.input}`}>
           <Checkbox
+            key="3"
+            // checked={checkedboxRef.current[3] || false}
+            checked={checked[2]}
+            onChange={()=> (handleCheckboxChange(2))}
             sx={{
               color: "#DFE3FA",
               "&.Mui-checked": {

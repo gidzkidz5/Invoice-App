@@ -22,7 +22,6 @@ export default function InvoicesPage() {
     (url) => fetch(url).then((res) => res.json())
   );
 
-
   useEffect(() => {
     if (data) {
       // console.log(data.result[0].clientName)
@@ -30,6 +29,17 @@ export default function InvoicesPage() {
       // console.log(loadedInvoices)
     }
   }, [data])
+
+  //checkboxes 
+  const [checked, setChecked] = useState([false, false ,false])
+    
+
+    function handleCheckboxChange(index) {
+        setChecked(
+            checked.map((isChecked, i) => (i === index ? !isChecked : isChecked))
+          )
+    }
+
 
   if (loadedInvoices.length === 0) {
     return <p>Loading...</p>
@@ -40,6 +50,7 @@ export default function InvoicesPage() {
       <InvoicePageHeader
         onClick={AddNewInvoice}
         count={loadedInvoices.length}
+        onCheckboxChange={handleCheckboxChange}
        />
       <div className="invoicePage">
         {loadedInvoices.map((item) => (

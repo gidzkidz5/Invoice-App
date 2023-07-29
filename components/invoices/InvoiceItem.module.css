@@ -1,0 +1,55 @@
+.main {
+  display: grid;
+  grid-template-rows: 1fr;
+  /* grid-template-columns: minmax(59px,0.15677fr) minmax(92px, 0.22983fr) minmax(75px,0.2285388fr) minmax(70px,0.1689056fr) minmax(106px,0.158295fr) 18px; */
+  grid-template-columns: 0.8fr 0.8fr 1fr 1fr 0.8fr;
+  width: 100%;
+ 
+  align-items: center;
+  justify-content: space-between;
+  
+  cursor: pointer;
+  column-gap: 10px;
+
+  
+  padding-inline: 2rem;
+  padding-block: 1.05rem;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.1);
+
+}
+
+.gap {
+    display: flex;
+    gap:10px;
+    width: 2.5rem;
+}
+
+.arrow {
+    cursor: pointer;
+  
+}
+
+.symbol {
+  color: #7e88c3;
+
+}
+.date,
+.name {
+  color: #7e88c3;
+}
+
+.date {
+    padding-right: 1.5rem;
+}
+.container {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    justify-self: end;
+}
+
+.price{ 
+  justify-self: center;
+}

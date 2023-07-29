@@ -1,8 +1,13 @@
 .delete {
     background-color: hsl(var(--clr-delete-btn));
     color: #FFF;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .delete:hover {
     background-color: hsl(var(--clr-delete-hover));
 }
+

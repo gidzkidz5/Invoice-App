@@ -1,28 +1,32 @@
 .main {
     display: flex;
-    padding-inline: 30px;
+    padding-inline: 18px;
     padding-block: 14px 11px;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
     border-radius: 6px;
+    max-width: 114px;
     
 
 }
 
-.paid {
+.paid.main {
     background-color: hsla(160, 67%, 52%, 0.0570882);
     color: hsla(160, 67%, 52%, 1);
+    padding-inline: 30px;
 }
 
-.pending {
+.pending.main {
     background: hsla(34, 100%, 50%, 0.0570882);
-    color: hsla(34, 100%, 50%, 1)
+    color: hsla(34, 100%, 50%, 1);
+    padding-inline: 18px;
 }
 
-.draft {
+.draft.main {
     background-color: hsla(231, 20%, 27%, 0.0570882);
     color: hsla(231, 20%, 27%, 1);
+    padding-inline: 27px;
 }
 
 .circle {

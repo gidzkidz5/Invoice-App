@@ -1,8 +1,8 @@
 import styles from "./AddNewInvoiceBtn.module.css";
 
-export default function AddNewInvoiceBtn() {
+export default function AddNewInvoiceBtn(props) {
   return (
-    <button className={`${styles.btn} ff-sanserif flex ff-S2`}>
+    <button className={`${styles.btn} ff-sanserif flex ff-S2`} onClick={props.handleClick}>
       <div className={`${styles.plus}`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

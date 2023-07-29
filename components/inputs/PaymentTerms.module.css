@@ -1,4 +1,4 @@
-#paymentTerms {
+.paymentTerms {
     width: 240px;
     height: 48px;
     flex-shrink: 0;
@@ -7,13 +7,19 @@
     font-family: var(--ff-spartan);
 }
 
-#paymentTerms.light{
+.paymentTerms.light{
     border: 1px solid hsl(var(--clr-whitegreypurple));
     background-color: #FFF;
     cursor: pointer;
 }
 
-#paymentTerms:hover.light{
+.paymentTerms:hover.light{
     border: 1px solid #7C5DFA;
     background-color: #FFF;
+}
+
+.child {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
 }

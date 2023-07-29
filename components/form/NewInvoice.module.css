@@ -6,6 +6,51 @@
 
 .form {
     background-color: #FFF;
+    padding-inline: 6rem 3.5rem;
+    border-radius: 0px 20px 20px 0px;
+    position: absolute;
+    top: 0;
+    left: -60vw;
+    overflow-y: scroll;
+    max-height: 100vh;
+    transition: left 0.8s ease;
+}
+
+.form.show {
+    left: 80px;
+}
+
+.form::-webkit-scrollbar-track
+{
+	/* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
+	border-radius: 10px;
+	background-color: transparent;
+    transform: translateX(-100px);
+}
+
+.form::-webkit-scrollbar
+{
+	width: 9px;
+	background-color: transparent;
+    transform: translateX(-100px);
+}
+
+.form::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: hsla(231, 20%, 61%, 0.5);
+    transform: translateX(-100px);
+    
+}
+
+.form::-webkit-scrollbar-thumb:hover
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+    cursor:pointer;
+  
 }
 
 .noArrow::-webkit-inner-spin-button,
@@ -27,6 +72,7 @@
     display: flex;
     gap: 1.5rem;
 }
+
 .child {
     display: flex;
     flex-direction: column;
@@ -56,6 +102,7 @@
     display:flex;
     justify-content: space-between;
     margin-top: 2.5rem;
+    margin-bottom: 2rem;
 }
 
 .btnChild {

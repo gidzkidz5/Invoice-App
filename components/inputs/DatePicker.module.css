@@ -16,3 +16,9 @@
 .main:hover.light {
     border-color: #7C5DFA;
 }
+
+.child {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}

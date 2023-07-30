@@ -1,3 +1,4 @@
+import { InvoiceProvider } from "@/InvoiceContext";
 import NewInvoice from "@/components/form/NewInvoice";
 import Layout from "@/components/layout/layout";
 import "@/styles/globals.css";
@@ -10,8 +11,10 @@ export const leagueSpartan = League_Spartan({
 
 export default function App({ Component, pageProps }) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <InvoiceProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </InvoiceProvider>
   );
 }

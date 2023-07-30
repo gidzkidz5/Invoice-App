@@ -71,7 +71,7 @@ export default function InvoicesPage() {
         <NewInvoice
             show={showForm}
         />
-      {/* <div className="no-invoices">
+      {(loadedInvoices.length === 0) && <div className="no-invoices">
         <div>
           <svg width="242" height="200" xmlns="http://www.w3.org/2000/svg">
             <g fill-rule="nonzero" fill="none">
@@ -369,7 +369,7 @@ export default function InvoicesPage() {
             Create an invoice by clicking the <span>New Invoice</span> button and get started
           </p>
         </div>
-      </div> */}
+      </div>}
     </>
   );
 }

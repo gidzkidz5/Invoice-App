@@ -1,11 +1,11 @@
-export function SaveSendButton() {
+export function SaveSendButton(props) {
     return (
-        <button className="send ff-sanserif fs-S2">Save & Send</button>
+        <button onClick={props.onClick} className="send ff-sanserif fs-S2">Save & Send</button>
     )
 }
 
-export function SaveDraftButton() {
+export function SaveDraftButton(props) {
     return (
-        <button className="draft ff-sanserif fs-S2 light">Save as Draft</button>
+        <button onClick={props.onClick} className="draft ff-sanserif fs-S2 light">Save as Draft</button>
     )
 }

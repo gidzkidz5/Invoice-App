@@ -81,11 +81,13 @@
 
 .itemList {
     display: grid;
-    grid-template-columns: 0.42fr 0.091fr 0.2fr 0.17fr;
+    grid-template-columns: 0.42fr 0.091fr 0.2fr minmax(40px, 0.2fr);
     column-gap: 1rem;
+    row-gap: 1.0rem;
 
     grid-auto-rows: minmax(30px, auto);
     margin-bottom: 18px;
+    min-width: 100%;
  
 }
 

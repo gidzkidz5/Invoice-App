@@ -24,16 +24,13 @@ export default function InvoicesPage() {
 
   useEffect(() => {
     if (data) {
-      // console.log(data.result[0].clientName)
       setLoadedInvoices(data.result)
-      // console.log(loadedInvoices)
     }
   }, [data])
 
   //checkboxes 
   const [checked, setChecked] = useState([false, false ,false])
     
-
     function handleCheckboxChange(index) {
         setChecked(
             checked.map((isChecked, i) => (i === index ? !isChecked : isChecked))

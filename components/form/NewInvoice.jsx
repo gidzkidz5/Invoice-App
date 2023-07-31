@@ -6,6 +6,7 @@ import DatePicker from "../inputs/DatePicker";
 import PaymentTerms from "../inputs/PaymentTerms";
 import styles from "./NewInvoice.module.css";
 import { addDaysToDate } from "@/helpers/others-util";
+import { Fragment } from "react";
 
 export default function NewInvoice(props) {
     const [data, setData] = useState({
@@ -27,12 +28,40 @@ export default function NewInvoice(props) {
         street: null,
         city: null,
         postCode: null,
-        coutry: null
+        country: null
       },
-      items: [{
-      }],
-      total: null
+      items: [],
+      total: 0
     })
+    const [inputFields, setInputFields] = useState([
+      {id: 1, itemName: '', quantity: 0, price: 0}
+    ]);
+
+    const handleChange = (id, field, value) => {
+      setInputFields((prevInputFields) =>
+        prevInputFields.map((fieldObj) => {
+          if (fieldObj.id === id) {
+            return { ...fieldObj, [field]: value };
+          }
+          return fieldObj;
+        })
+      );
+    };
+    
+    //for add new item line button
+    const handleAddInputField = (e) => {
+      console.log('clicked')
+      e.preventDefault();
+      setInputFields((prevInputFields) => [
+        ...prevInputFields,
+        {
+          id: Date.now(),
+          itemName: '',
+          quantity: 0,
+          price: 0,
+        },
+      ]);
+    };
 
     const sellerAddressRef = useRef();
     const sellerCityRef = useRef();
@@ -48,11 +77,7 @@ export default function NewInvoice(props) {
     const clientDateRef = useRef();
     const clientPaymentTermsRef = useRef();
     const clientDescriptionRef = useRef();
-
-    
-
-    
-
+  
     async function createNewInvoice(inputs) {
 
       const response = await fetch('api/invoices/createInvoice', {
@@ -72,41 +97,89 @@ export default function NewInvoice(props) {
       return data
     }
 
-    async function handleClick(e) {
-      const dueDate = addDaysToDate(clientDateRef.current.value, parseInt(clientPaymentTermsRef.current.value))
-      e.preventDefault()
-      setData((prevValue) => (
-        prevValue.id = "NE123", //to change
-        prevValue.createdAt = clientDateRef.current.value,
-        prevValue.paymentDue = dueDate,
-        prevValue.description = clientDescriptionRef.current.value,
-        prevValue.paymentTerms = clientPaymentTermsRef.current.value,
-        prevValue.clientName = clientNameRef.current.value,
-        prevValue.clientEmail = clientEmailRef.current.value,
-        prevValue.status = "pending", //to change
-        prevValue.senderAddress = {
+    async function handleClick(e, whatStatus) {
+      e.preventDefault();
+
+      const dueDate = addDaysToDate(clientDateRef.current.value, parseInt(clientPaymentTermsRef.current.value));
+
+      // setData((prevValue) => ({
+      //   ...prevValue,
+      //   id: "NE1234", //to change
+      //   createdAt: clientDateRef.current.value,
+      //   paymentDue: dueDate,
+      //   description: clientDescriptionRef.current.value,
+      //   paymentTerms: clientPaymentTermsRef.current.value,
+      //   clientName: clientNameRef.current.value,
+      //   clientEmail: clientEmailRef.current.value,
+      //   status: whatStatus,
+      //   senderAddress: {
+      //     street: sellerAddressRef.current.value,
+      //     city: sellerCityRef.current.value,
+      //     postCode: sellerPostCodeRef.current.value,
+      //     country: sellerCountryRef.current.value 
+      //   },
+      //   clientAddress: {
+      //     street: clientAddressRef.current.value,
+      //     city: clientCityRef.current.value,
+      //     postCode: clientPostCodeRef.current.value,
+      //     country: clientCountryRef.current.value
+      //   },
+      //   // items = [{ //to change
+      //   //   name: "Brand Guidelines",
+      //   //   quantity: 1,
+      //   //   price: 1820.90,
+      //   //   total: 1820.90,
+         
+      //   // }],
+      //   items: inputFields.map((fieldObj) =>( {
+      //     name: fieldObj.itemName,
+      //     quantity: fieldObj.quantity,
+      //     price: fieldObj.price,
+      //     total: fieldObj.quantity * fieldObj.price
+      //   })),
+      //   total: 1800.20
+
+      //   // inputFields.reduce((acc, obj)=> acc + obj.price, 0)
+      // }))
+      // console.log(data, "data before submitting")
+
+      const updatedData = {
+        ...data,
+        id: "NE1234", //to change
+        createdAt: clientDateRef.current.value,
+        paymentDue: dueDate,
+        description: clientDescriptionRef.current.value,
+        paymentTerms: clientPaymentTermsRef.current.value,
+        clientName: clientNameRef.current.value,
+        clientEmail: clientEmailRef.current.value,
+        status: whatStatus,
+        senderAddress: {
           street: sellerAddressRef.current.value,
           city: sellerCityRef.current.value,
           postCode: sellerPostCodeRef.current.value,
-          country: sellerCountryRef.current.value 
+          country: sellerCountryRef.current.value,
         },
-        prevValue.clientAddress = {
+        clientAddress: {
           street: clientAddressRef.current.value,
           city: clientCityRef.current.value,
           postCode: clientPostCodeRef.current.value,
-          country: clientCountryRef.current.value
+          country: clientCountryRef.current.value,
         },
-        prevValue.items = [{ //to change
-          name: "Brand Guidelines",
-          quantity: 1,
-          price: 1820.90,
-          total: 1820.90
-        }],
-        prevValue.total = 1820.90 //to change
-      ))
-      const result = await createNewInvoice(data)
+        items: inputFields.map((fieldObj) => ({
+          name: fieldObj.itemName,
+          quantity: parseFloat(fieldObj.quantity),
+          price: parseFloat(fieldObj.price),
+          total: fieldObj.quantity * fieldObj.price,
+        })),
+        total: parseFloat(inputFields.reduce((acc, obj)=> acc + (parseFloat(obj.price) * parseFloat(obj.quantity)), parseFloat(0))),
+        
+      };
+
+      const result = await createNewInvoice(updatedData)
       
       console.log(result)
+      window.location.reload();
+      
       return result
 
   }
@@ -206,12 +279,18 @@ export default function NewInvoice(props) {
               <label className="fs-body" htmlFor="total">Total</label>
               
               
-              <input className={`${styles.itemListInput} light fs-S2`} type="text" id="itemName"/>
-              <input className={`${styles.noArrow} light fs-S2`} type="number" id="quantity"/>
-              <input className={`${styles.noArrow} light fs-S2`} type="number" id="price" />
-              <div>154</div>
+              {inputFields.map((item) => (
+                <Fragment key={item.id}>
+                <input className={`${styles.itemListInput} light fs-S2`} type="text" id={`itemName_${item.id}`} value={item.itemName} onChange={(e) => handleChange(item.id, 'itemName', e.target.value)} key={item.id}/>
+                <input className={`${styles.noArrow} light fs-S2`} type="number" id={`quantity_${item.id}`} value={item.quantity} onChange={(e) => handleChange(item.id, 'quantity', e.target.value)}/>
+                <input className={`${styles.noArrow} light fs-S2`} type="number" id={`price_${item.id}`} value={item.price} onChange={(e) => handleChange(item.id, 'price', e.target.value)}/>
+                <div>{(item.price * item.quantity).toFixed(2)}</div>
+              </Fragment>
+              ))}
             </div>
-            <AddNewItem/>
+            <AddNewItem
+              Click={handleAddInputField}
+            />
           </div>
         </div>
         <div className={`${styles.btnContainer}`}>
@@ -220,10 +299,10 @@ export default function NewInvoice(props) {
           />
           <div className={`${styles.btnChild}`}>
               <SaveDraftButton
-                onClick={handleClick}
+                onClick={(e)=>handleClick(e, "draft")}
               />
               <SaveSendButton
-                onClick={handleClick} 
+                onClick={(e)=>handleClick(e, "pending")} 
               />
           </div>
         </div>

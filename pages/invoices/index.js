@@ -11,6 +11,7 @@ export default function InvoicesPage() {
   //     body.classList.add('light')
   // },[])
   const [showForm, setShowForm] = useState(false)
+  
   function AddNewInvoice() {
     setShowForm(!showForm)
   }
@@ -56,7 +57,7 @@ export default function InvoicesPage() {
             id={item.id}
             dueDate={item.paymentDue}
             name={item.clientName}
-            total={item.total}
+            total={(item.total).toFixed(2)}
             status={item.status}
             
           />

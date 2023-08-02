@@ -4,7 +4,7 @@ import Edit from '../buttons/Edit'
 import MarkPaid from '../buttons/MarkPaid'
 import styles from './DetailedInvoice.module.css'
 import InvoiceStatus from './InvoiceStatus'
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 export default function DetailedInvoice(props) {
@@ -23,11 +23,6 @@ export default function DetailedInvoice(props) {
     }
 
     function handleClick () {
-        // useEffect(()=> {
-        //     async function postData() {
-        //         const update = await 
-        //     }
-        // })
         changeStatus();
         console.log(wantedStatus, "wantedStatus")
        
@@ -68,7 +63,9 @@ export default function DetailedInvoice(props) {
                     />
                 </div>
                 <div className={`${styles.btnContainer}`}>
-                    <Edit/>
+                    <Edit
+                        onClick={props.editOnClick}
+                    />
                     <Delete/>
                     <MarkPaid
                         status={props.status}
@@ -126,13 +123,13 @@ export default function DetailedInvoice(props) {
                         <p className={`${styles.grey} ${styles.column4} fs-body`}>Total</p>
 
                         {/* to be mapped */}
-                        {props.items.map(item => (
-                            <>
+                        {props.items.map((item, index) => (
+                            <Fragment key={index}>
                             <h2 className={`fs-S ${styles.black} ${styles.column1}`}>{item.name}</h2>
                             <h2 className={`fs-S ${styles.grey} ${styles.column2}`}>{item.quantity}</h2>
                             <h2 className={`fs-S ${styles.grey}`}>$ {item.price.toFixed(2)}</h2>
                             <h2 className={`fs-S ${styles.black}`}>$ {item.total.toFixed(2)}</h2>
-                            </>
+                            </Fragment>
                         ))}
 
                     </div>

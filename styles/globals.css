@@ -272,8 +272,7 @@ button:hover {
   max-height: 75vh;
   overflow-y: scroll;
   overflow-x:visible;
-  
-  
+
 }
 
 .invoicePage::-webkit-scrollbar-track

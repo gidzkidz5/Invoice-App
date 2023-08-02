@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import AddNewItem from "../buttons/AddNewItem";
-import Discard from "../buttons/Discard";
+import Discard, { Cancel } from "../buttons/Discard";
 import { SaveChanges, SaveDraftButton, SaveSendButton } from "../buttons/Save";
 import DatePicker from "../inputs/DatePicker";
 import PaymentTerms from "../inputs/PaymentTerms";
@@ -299,13 +299,10 @@ export default function EditInvoice(props) {
           </div>
         </div>
         <div className={`${styles.btnContainer}`}>
-          <Discard
-              Click={handleClick}
-          />
+          
           <div className={`${styles.btnChild}`}>
-              <SaveDraftButton
-                onClick={(e)=>handleClick(e, "draft")}
-              />
+                <Cancel
+                />
               <SaveChanges
                 onClick={(e)=>handleClick(e, props.loadedData.status)} 
               />

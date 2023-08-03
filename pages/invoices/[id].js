@@ -10,7 +10,8 @@ export default function DetailedInvoicePage() {
   const [isBlank, setIsBlank] = useState(false);
   const [showForm, setShowForm] = useState(false)
   
-  function showInvoice() {
+  function showInvoice(e) {
+    e.preventDefault();
     setShowForm(!showForm)
   }
 
@@ -55,7 +56,7 @@ export default function DetailedInvoicePage() {
       senderCity={loadedInvoice.senderAddress.city}
       senderPostCode={loadedInvoice.senderAddress.postCode}
       senderCountry={loadedInvoice.senderAddress.country}
-      createdDate={loadedInvoice.createAt}
+      createdDate={loadedInvoice.createdAt}
       dueDate={loadedInvoice.paymentDue}
       clientName={loadedInvoice.clientName}
       clientStreet={loadedInvoice.clientAddress.street}
@@ -72,6 +73,7 @@ export default function DetailedInvoicePage() {
     <EditInvoice
         show={showForm}
         loadedData={loadedInvoice}
+        onClick={showInvoice}
     />
     </>
   );

@@ -295,7 +295,7 @@ export default function NewInvoice(props) {
         </div>
         <div className={`${styles.btnContainer}`}>
           <Discard
-              Click={handleClick}
+              Click={props.discardClick}
           />
           <div className={`${styles.btnChild}`}>
               <SaveDraftButton

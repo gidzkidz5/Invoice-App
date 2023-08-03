@@ -142,7 +142,7 @@
 
 .btnContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
   margin-top: 2.5rem;
   margin-bottom: 2rem;
 }

@@ -1,11 +1,15 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import styles from "./FilterStatus.module.css";
 import { Checkbox } from "@mui/material";
+import { InvoiceContext } from "@/InvoiceContext";
 
 
 export default function FilterStatus(props) {
   const [dropdown, setDropdown] = useState(false);
   const [checked, setChecked] = useState([false, false ,false])
+  const {InvoiceData, updateInvoiceData, setInvoiceData} = useContext(InvoiceContext);
+  
+
 
   function rotateArrow() {
     setDropdown(!dropdown);
@@ -13,6 +17,23 @@ export default function FilterStatus(props) {
 
   function handleCheckboxChange(index) {
     console.log(index)
+    let statusChecked;
+    if (index === 0) {
+      statusChecked = "draft"
+    } else if (index === 1) {
+      statusChecked = "pending"
+    } else {
+      statusChecked = "paid"
+    }
+
+    setInvoiceData((prevValue) => ({
+      filterStatus: {
+        ...prevValue.filterStatus,
+        [statusChecked]: !prevValue.filterStatus[statusChecked]
+      }
+    }))
+
+    console.log(InvoiceData)
     setChecked(
       checked.map((isChecked, i) => (i === index ? !isChecked : isChecked))
     )

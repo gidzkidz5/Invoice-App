@@ -4,7 +4,11 @@ import { createContext, useState } from 'react';
 export const InvoiceContext = createContext();
 
 export const InvoiceProvider = ({ children }) => {
-  const [InvoiceData, setInvoiceData] = useState({});
+  const [InvoiceData, setInvoiceData] = useState({filterStatus: {
+    draft: false,
+    pending: false,
+    paid: false
+  }});
 
 //   const updateFormData = (newData) => {
 //     setFormData((prevData) => ({ ...prevData, ...newData }));
@@ -14,7 +18,7 @@ export const InvoiceProvider = ({ children }) => {
     }
 
   return (
-    <InvoiceContext.Provider value={{ InvoiceData, updateInvoiceData }}>
+    <InvoiceContext.Provider value={{ InvoiceData, updateInvoiceData, setInvoiceData }}>
       {children}
     </InvoiceContext.Provider>
   );

@@ -2,8 +2,9 @@ import NewInvoice from "@/components/form/NewInvoice";
 import InvoiceItem from "@/components/invoices/InvoiceItem";
 import InvoicePageHeader from "@/components/invoices/InvoicePageHeader";
 import InvoiceStatus from "@/components/invoices/InvoiceStatus";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import useSWR from 'swr';
+import { InvoiceContext } from "@/InvoiceContext";
 
 export default function InvoicesPage() {
   // useEffect(() => {
@@ -11,12 +12,16 @@ export default function InvoicesPage() {
   //     body.classList.add('light')
   // },[])
   const [showForm, setShowForm] = useState(false)
+  const { InvoiceData } = useContext(InvoiceContext)
+  let temp = [];
   
-  function AddNewInvoice() {
+  function AddNewInvoice(e) {
+    e.preventDefault();
     setShowForm(!showForm)
   }
 
   const [loadedInvoices, setLoadedInvoices] = useState([])
+
 
   const { data, error } = useSWR(
     "/api/invoices/invoices",
@@ -25,9 +30,59 @@ export default function InvoicesPage() {
 
   useEffect(() => {
     if (data) {
-      setLoadedInvoices(data.result)
+      //add filter params here
+     
+      let finalFilteredData = []
+      let filteredData;
+      
+      if (InvoiceData.filterStatus.draft) {
+         filteredData = data.result.filter((invoice) => {
+          return (invoice.status === "draft")
+        })
+        
+        finalFilteredData = [...temp, ...filteredData]
+        temp = finalFilteredData
+        // console.log(temp, "temp draft")
+      }
+
+      if (InvoiceData.filterStatus.pending) {
+         filteredData = data.result.filter((invoice) => {
+          return (invoice.status === "pending")
+        })
+        finalFilteredData = [...temp, ...filteredData]
+        temp = finalFilteredData
+        // console.log(temp, "temp pending")
+      }
+
+      if (InvoiceData.filterStatus.paid) {
+         filteredData = data.result.filter((invoice) => {
+          return (invoice.status === "paid")
+        })
+        finalFilteredData = [...temp, ...filteredData]
+        temp = finalFilteredData
+        // console.log(temp, "temp paid")
+      }
+
+      if (!InvoiceData.filterStatus.paid && !InvoiceData.filterStatus.pending && !InvoiceData.filterStatus.draft) {
+        finalFilteredData = data.result
+      }
+
+     
+      
+        console.log(finalFilteredData, "finalFilteredData")
+        
+        setLoadedInvoices(finalFilteredData)
+        // console.log(loadedInvoices, "loadedInvoices")
+        // console.log(data.result)
+       
+      
     }
-  }, [data])
+  }, [data, InvoiceData.filterStatus.paid, InvoiceData.filterStatus.draft, InvoiceData.filterStatus.pending])
+
+  // useEffect(() => {
+  //   console.log(loadedInvoices, "loadedInvoices");
+  // }, [loadedInvoices]);
+
 
   //checkboxes 
   const [checked, setChecked] = useState([false, false ,false])
@@ -51,13 +106,13 @@ export default function InvoicesPage() {
         onCheckboxChange={handleCheckboxChange}
        />
       <div className="invoicePage">
-        {loadedInvoices.map((item) => (
+        {loadedInvoices.map((item, index) => (
           <InvoiceItem
-            key={item.id}
+            key={index}
             id={item.id}
             dueDate={item.paymentDue}
             name={item.clientName}
-            total={(item.total).toFixed(2)}
+            total={(item.total) ? (item.total).toFixed(2) : 0}
             status={item.status}
             
           />
@@ -68,6 +123,7 @@ export default function InvoicesPage() {
         </div>
         <NewInvoice
             show={showForm}
+            discardClick={AddNewInvoice}
         />
       {(loadedInvoices.length === 0) && <div className="no-invoices">
         <div>

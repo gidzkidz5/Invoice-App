@@ -301,8 +301,9 @@ export default function EditInvoice(props) {
         <div className={`${styles.btnContainer}`}>
           
           <div className={`${styles.btnChild}`}>
-                <Cancel
-                />
+              <Cancel
+                Click={props.onClick}
+              />
               <SaveChanges
                 onClick={(e)=>handleClick(e, props.loadedData.status)} 
               />

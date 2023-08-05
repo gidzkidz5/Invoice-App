@@ -14,12 +14,14 @@ export default function InvoicePageHeader(props) {
         props.onCheckboxChange(index)
     }
 
+   
+
     return (
         <>
             <div className={`${styles.main} ff-sanserif`}>
                 <div className={`${styles.textmain}`}>
                     <h1 className="fs-L">Invoices</h1>
-                    <p className='fs-body'>There are {props.count} pending invoices</p>
+                    <p className='fs-body'>There are {props.count} total invoices</p>
                 </div>
                 <div className={`${styles.uimain}`}>
                     <FilterStatus

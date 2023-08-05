@@ -18,3 +18,33 @@
 
     align-items: center;
 }
+
+@media only screen and (max-width: 35em) {
+    .textmain h1{
+        font-family: League Spartan;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: -0.75px;
+    }
+
+    .textmain p {
+        word-wrap: break-word;
+        max-width: 12ch;
+    }
+
+    .main {
+        display: flex;
+        justify-content:space-between;
+        gap: 9vw;
+        width: 100%;
+    }
+
+    .uimain {
+        display: flex;
+        min-width: 180px;
+        align-items: center;
+        justify-content: space-between
+    }
+}

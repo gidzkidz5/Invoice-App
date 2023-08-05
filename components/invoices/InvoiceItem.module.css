@@ -19,6 +19,52 @@
   box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.1);
 
 }
+/* mobile */
+@media only screen and (max-width: 35em) {
+  .main {
+    grid-template-areas: 
+    'title name'
+    'date status'
+    'price status'
+    ;
+    grid-template-rows: 26px 20px 20px;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 9px;
+
+    padding-inline: 1.5rem;
+    padding-block: 25px 22px;
+    align-items:start;
+  }
+
+  .title {
+    grid-area: title;
+  }
+
+  .name {
+    grid-area: name;
+    justify-self: right;
+  }
+  
+  .date {
+    grid-area: date;
+    align-self: center;
+    padding-right: none;
+  }
+
+  h1.price {
+    grid-area: price;
+    justify-self: left;
+  }
+
+  .container {
+    grid-area: status;
+    align-self: center;
+  }
+
+  .arrow {
+    display: none;
+  }
+}
 
 .gap {
     display: flex;

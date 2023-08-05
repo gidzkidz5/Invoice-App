@@ -156,3 +156,57 @@
   width: 100%;
   max-width: 100%;
 }
+
+
+/* Tablet */
+
+@media only screen and (min-width: 64.01em) and (max-width: 80em) {
+  .form {
+      left: -75vw;
+     
+  }
+}
+
+@media only screen and (min-width: 35.01em) and (max-width: 64em) {
+  .form {
+      left:  -150vw;
+      top: 80px;
+  }
+
+  .form.show {
+      left: 0;
+      top: 80px;
+      padding-inline: 2rem;;
+  }
+}
+
+/* Mobile */
+
+@media only screen and (max-width: 35em) {
+  .form {
+      left: -101vw;
+      top: 80px;
+      max-width: 100%;
+      padding-inline: 2rem;
+  }
+
+  .form.show {
+      left: 0;
+      top: 80px;
+      padding-inline: 2rem;
+      width: 100%;
+  }
+
+  .parent {
+      flex-wrap: wrap;
+  }
+
+  .parent > div:nth-child(3) {
+      width: 100%;
+  }
+
+  .parent > div:nth-child(3) input {
+      width: 100%;
+      max-width: 87.5%;
+  }
+}

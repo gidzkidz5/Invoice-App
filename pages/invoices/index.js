@@ -13,11 +13,19 @@ export default function InvoicesPage() {
   // },[])
   const [showForm, setShowForm] = useState(false)
   const { InvoiceData } = useContext(InvoiceContext)
+  // const form = document.querySelector('form');
+
   let temp = [];
   
   function AddNewInvoice(e) {
     e.preventDefault();
     setShowForm(!showForm)
+
+    // form.scrollTo({
+    //   top: 0,
+    //   behavior:'smooth'
+    // })
+
   }
 
   const [loadedInvoices, setLoadedInvoices] = useState([])

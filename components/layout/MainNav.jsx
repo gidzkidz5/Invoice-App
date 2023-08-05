@@ -11,7 +11,7 @@ export default function MainNav() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <nav className="light" id="navbar">
-        <div>
+        <div className="navlogo">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="103"

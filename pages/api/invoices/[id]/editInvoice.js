@@ -46,4 +46,18 @@ export default async function handler(req, res) {
       client.close();
   
     }
+
+    if (req.method === "DELETE") {
+      const client = await connectDatabase();
+  
+      const db = client.db();
+
+      const result = await db.collection('Invoices').findOneAndDelete({
+        id: invoiceId
+      });
+
+      res.status(200).json({result})
+
+      client.close()
+    }
   }

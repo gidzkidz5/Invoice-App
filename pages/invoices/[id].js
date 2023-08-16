@@ -3,16 +3,28 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { capitalizeFirstLetter } from "@/helpers/others-util";
 import EditInvoice from "@/components/form/EditInvoice";
+import ConfirmDelete from "@/components/layout/ConfirmDelete";
 export default function DetailedInvoicePage() {
   const router = useRouter();
 
   const [loadedInvoice, setLoadedInvoice] = useState();
   const [isBlank, setIsBlank] = useState(false);
   const [showForm, setShowForm] = useState(false)
+  const [showDelete, setShowDelete] = useState(false);
   
   function showInvoice(e) {
     e.preventDefault();
     setShowForm(!showForm)
+  }
+
+  function deleteInvoice(e) {
+    e.preventDefault();
+    showDeleteBg(e)
+  }
+
+  function showDeleteBg(e) {
+    e.preventDefault();
+    setShowDelete(!showDelete)
   }
 
   useEffect(() => {
@@ -56,7 +68,7 @@ export default function DetailedInvoicePage() {
       senderCity={loadedInvoice.senderAddress.city}
       senderPostCode={loadedInvoice.senderAddress.postCode}
       senderCountry={loadedInvoice.senderAddress.country}
-      createdDate={loadedInvoice.createdAt}
+      createdDate={loadedInvoice.createAt || loadedInvoice.createdAt}
       dueDate={loadedInvoice.paymentDue}
       clientName={loadedInvoice.clientName}
       clientStreet={loadedInvoice.clientAddress.street}
@@ -68,6 +80,7 @@ export default function DetailedInvoicePage() {
       total={loadedInvoice.total.toFixed(2)}
 
       editOnClick={showInvoice}
+      deleteClick={showDeleteBg}
     />
 
     <EditInvoice
@@ -75,6 +88,12 @@ export default function DetailedInvoicePage() {
         loadedData={loadedInvoice}
         onClick={showInvoice}
     />
+    {(showDelete) && <div className="darkenBg">
+      <ConfirmDelete
+          deleteClick={deleteInvoice}
+          cancelClick={showDeleteBg}
+      />
+    </div>}
     </>
   );
 }

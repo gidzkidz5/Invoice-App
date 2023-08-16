@@ -29,6 +29,13 @@
     padding-inline: 27px;
 }
 
+.main.draft:global(.dark) {
+    background-color:hsla(231, 73%, 93%, 0.0571);
+    color: hsla(231, 20%, 27%, 1);
+    padding-inline: 27px;
+}
+
+
 .circle {
     width: 8px;
     height: 8px;
@@ -47,8 +54,20 @@
     background-color: hsla(231, 20%, 27%, 1);
 }
 
+.circle.draft:global(.dark) {
+    background-color:hsla(231, 73%, 93%,1);
+}
+
 
 .status {
     opacity: 1.0;
     font-weight: 700;
+}
+
+.main.draft:global(.dark) .status{
+    color:#DFE3FA;
+}
+
+.main.draft:global(.dark) .circle {
+    background-color:hsla(231, 73%, 93%, 1);
 }

@@ -7,14 +7,15 @@
     padding-inline: 20px 16px;
 }
 
-.main.light {
+.main:global(.light) {
     color: hsl(var(--clr-black));
     border: 1px solid hsl(var(--clr-whitegreypurple));
     background: #FFF;
     cursor: pointer;
 }
 
-.main:hover.light {
+.main:hover:global(.light),
+.main:hover:global(.dark) {
     border-color: #7C5DFA;
 }
 

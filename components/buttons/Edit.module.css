@@ -1,5 +1,4 @@
-.btn {
-    background-color: #F9FAFE;
+.btn{
     color: #7E88C3;
     text-align: center;
     
@@ -8,7 +7,15 @@
     justify-content: center;
     gap: 0.5rem;
     padding-inline: 24px;
+    transition: background-color 0.5s ease-in-out;
 
+}
+
+.btn:global(.light) {
+    background-color: #F9FAFE;
+}
+.btn:global(.dark) {
+    background-color: #252945;
 }
 
 .btn:hover {

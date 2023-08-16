@@ -12,8 +12,11 @@
   position: relative;
 }
 
-.text {
+.text:global(.light) {
   color: #0c0e16;
+}
+.text:global(.dark) {
+  color: #FFF;
 }
 
 .arrow {

@@ -9,9 +9,22 @@
     flex-direction: column;
 }
 
-.textmain p {
+.textmain:global(.light) h1 {
+    color: #0C0E16;
+}
+
+.textmain:global(.dark) h1 {
+    color: #FFF;
+}
+
+.textmain:global(.light) p {
     color: #888EB0;
 }
+
+.textmain:global(.dark) p {
+    color: #DFE3FA;
+}
+
 
 .uimain {
     display: flex;
@@ -45,6 +58,6 @@
         display: flex;
         min-width: 180px;
         align-items: center;
-        justify-content: space-between
+        justify-content: space-between;
     }
 }

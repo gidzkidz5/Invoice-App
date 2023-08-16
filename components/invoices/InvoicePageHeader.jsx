@@ -5,7 +5,6 @@ import FilterStatus from '../inputs/FilterStatus'
 import styles from './InvoicePageHeader.module.css'
 export default function InvoicePageHeader(props) {
     const [checked, setChecked] = useState([false, false ,false])
-    
 
     function handleCheckboxChange(index) {
         setChecked(
@@ -19,13 +18,14 @@ export default function InvoicePageHeader(props) {
     return (
         <>
             <div className={`${styles.main} ff-sanserif`}>
-                <div className={`${styles.textmain}`}>
+                <div className={`${styles.textmain} ${props.theme}`}>
                     <h1 className="fs-L">Invoices</h1>
                     <p className='fs-body'>There are {props.count} total invoices</p>
                 </div>
                 <div className={`${styles.uimain}`}>
                     <FilterStatus
                         onCheckboxChange={handleCheckboxChange}
+                        theme={props.theme}
                     />
                     <AddNewInvoiceBtn
                         handleClick={props.onClick}

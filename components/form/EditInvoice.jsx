@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import AddNewItem from "../buttons/AddNewItem";
 import Discard, { Cancel } from "../buttons/Discard";
 import { SaveChanges, SaveDraftButton, SaveSendButton } from "../buttons/Save";
@@ -7,9 +7,12 @@ import PaymentTerms from "../inputs/PaymentTerms";
 import styles from "./EditInvoice.module.css";
 import { addDaysToDate } from "@/helpers/others-util";
 import { Fragment } from "react";
+import { ThemeContext } from "@/ThemeContext";
 
 export default function EditInvoice(props) {
-    const [data, setData] = useState({
+  const {theme} = useContext(ThemeContext)
+
+  const [data, setData] = useState({
       id: null,
       createdAt: null,
       paymentDue: null,
@@ -108,7 +111,7 @@ export default function EditInvoice(props) {
 
 
     useEffect(() => {
-      const { status, id, description, senderAddress, createAt, paymentDue, paymentTerms, clientName, clientAddress, clientEmail, items, total } = props.loadedData;
+      const { status, id, description, senderAddress, createAt, createdAt, paymentDue, paymentTerms, clientName, clientAddress, clientEmail, items, total } = props.loadedData;
       
 
       sellerAddressRef.current.value = senderAddress.street
@@ -122,7 +125,7 @@ export default function EditInvoice(props) {
       clientCityRef.current.value = clientAddress.city
       clientPostCodeRef.current.value = clientAddress.postCode
       clientCountryRef.current.value = clientAddress.country
-      clientDateRef.current.value = createAt
+      clientDateRef.current.value = createAt || createdAt 
       clientPaymentTermsRef.current.value = paymentTerms
       clientDescriptionRef.current.value = description
 
@@ -188,33 +191,33 @@ export default function EditInvoice(props) {
   return (
     <>
 
-      <form className={(props.show) ? `${styles.form} ${styles.show}` : `${styles.form}`}>
+      <form className={(props.show) ? `${styles.form} ${styles.show} ${theme}` : `${styles.form} ${theme}`}>
       
         <div className="ff-sanserif">
-          <h1 className={`${styles.header} fs-M`}>Edit <span className={`${styles.hash}`}>#</span>{props.loadedData.id}</h1>
+          <h1 className={`${styles.header} fs-M ${theme}`}>Edit <span className={`${styles.hash}`}>#</span>{props.loadedData.id}</h1>
 
           <h2 className={`${styles.title} fs-S`}>Bill Form</h2>
 
           <div className={`${styles.section}`}>
             <div className={`${styles.child}`}>
-              <label className="fs-body" htmlFor="address">Street Address</label>
-              <input className={`light fs-S2 ${styles.fullWidth} ${styles.fullWidth2}`} type="text" ref={sellerAddressRef}/>
+              <label className={`${theme} fs-body" htmlFor="address"`}>Street Address</label>
+              <input className={`${theme} fs-S2 ${styles.fullWidth} ${styles.fullWidth2}`} type="text" ref={sellerAddressRef}/>
             </div>
 
             <div className={`${styles.parent}`}>
               <div className={`${styles.child}`}>
-                <label className="fs-body" htmlFor="city">City</label>
-                <input className="light fs-S2" type="text" ref={sellerCityRef}/>
+                <label className={`${theme} fs-body`} htmlFor="city">City</label>
+                <input className={`${theme} fs-S2`} type="text" ref={sellerCityRef}/>
               </div>
 
               <div className={`${styles.child}`}>
-                <label className="fs-body" htmlFor="postcode">Post Code</label>
-                <input className="light fs-S2" type="text" ref={sellerPostCodeRef}/>
+                <label className={`${theme} fs-body"`} htmlFor="postcode">Post Code</label>
+                <input className={`${theme} fs-S2`} type="text" ref={sellerPostCodeRef}/>
               </div>
 
               <div className={`${styles.child}`}>
-                <label className="fs-body" htmlFor="country">Country</label>
-                <input className="light fs-S2" type="text" ref={sellerCountryRef}/>
+                <label className={`${theme} fs-body`} htmlFor="country">Country</label>
+                <input className={`${theme} fs-S2`} type="text" ref={sellerCountryRef}/>
               </div>
             </div>
           </div>
@@ -223,32 +226,32 @@ export default function EditInvoice(props) {
 
           <div className={`${styles.section}`}>
             <div className={`${styles.child}`}>
-              <label className="fs-body" htmlFor="name">Client's Name</label>
-              <input className={`light fs-S2 ${styles.fullWidth} ${styles.fullWidth2}`} id="name" type="text" ref={clientNameRef}/>
+              <label className={`${theme} fs-body`} htmlFor="name">Client's Name</label>
+              <input className={`${theme} fs-S2 ${styles.fullWidth} ${styles.fullWidth2}`} id="name" type="text" ref={clientNameRef}/>
             </div>
 
             <div className={`${styles.child}`}>
-              <label className="fs-body" htmlFor="email">Client's Email</label>
-              <input className={`light fs-S2 ${styles.fullWidth} ${styles.fullWidth2}`} id="email" type="text" ref={clientEmailRef}/>
+              <label className={`${theme} fs-body`}htmlFor="email">Client's Email</label>
+              <input className={`${theme} fs-S2 ${styles.fullWidth} ${styles.fullWidth2}`} id="email" type="text" ref={clientEmailRef}/>
             </div>
 
             <div className={`${styles.child}`}>
-              <label className="fs-body" htmlFor="clientAddress">Client's Address</label>
-              <input className={`light fs-S2 ${styles.fullWidth} ${styles.fullWidth2}`} id="clientAddress" type="text" ref={clientAddressRef}/>
+              <label className={`${theme} fs-body`} htmlFor="clientAddress">Client's Address</label>
+              <input className={`${theme} fs-S2 ${styles.fullWidth} ${styles.fullWidth2}`} id="clientAddress" type="text" ref={clientAddressRef}/>
             </div>
 
             <div className={`${styles.parent}`}>
               <div className={`${styles.child}`}>
-                <label className="fs-body" htmlFor="clientCity">City</label>
-                <input className="light fs-S2" id="clientCity" type="text" ref={clientCityRef}/>
+                <label className={`${theme} fs-body`} htmlFor="clientCity">City</label>
+                <input className={`${theme} fs-S2`} id="clientCity" type="text" ref={clientCityRef}/>
               </div>
               <div className={`${styles.child}`}>
-                <label className="fs-body" htmlFor="clientPostCode">Post Code</label>
-                <input className="light fs-S2" id="clientPostCode" type="text" ref={clientPostCodeRef}/>
+                <label className={`${theme} fs-body`} htmlFor="clientPostCode">Post Code</label>
+                <input className={`${theme} fs-S2`} id="clientPostCode" type="text" ref={clientPostCodeRef}/>
               </div>
               <div className={`${styles.child}`}>
-                <label className="fs-body" htmlFor="clientCountry">Country</label>
-                <input className="light fs-S2" id="clientCountry" type="text" ref={clientCountryRef}/>
+                <label className={`${theme} fs-body`} htmlFor="clientCountry">Country</label>
+                <input className={`${theme} fs-S2`} id="clientCountry" type="text" ref={clientCountryRef}/>
               </div>
             </div>
 
@@ -263,8 +266,8 @@ export default function EditInvoice(props) {
                />
             </div>
             <div className={`${styles.child}`}>
-              <label className="fs-body" htmlFor="description">Project Description</label>
-              <input className={`light fs-S2 ${styles.fullWidth} ${styles.fullWidth2}`} id="desciption" type="text" ref={clientDescriptionRef}/>
+              <label className={`${theme} fs-body`} htmlFor="description">Project Description</label>
+              <input className={`${theme} fs-S2 ${styles.fullWidth} ${styles.fullWidth2}`} id="desciption" type="text" ref={clientDescriptionRef}/>
             </div>
           </div>
 
@@ -274,18 +277,18 @@ export default function EditInvoice(props) {
           <div>
             <div className={`${styles.itemList}`}>
 
-              <label className="fs-body" htmlFor="itemName">Item Name</label> 
-              <label className="fs-body" htmlFor="quantity">Quantity</label>
-              <label className="fs-body" htmlFor="price">Price</label>
-              <label className={`fs-body ${styles.center}`} htmlFor="total">Total</label>
+              <label className={`${theme} fs-body`} htmlFor="itemName">Item Name</label> 
+              <label className={`${theme} fs-body`} htmlFor="quantity">Quantity</label>
+              <label className={`${theme} fs-body`} htmlFor="price">Price</label>
+              <label className={`fs-body ${styles.center} ${theme}`} htmlFor="total">Total</label>
               <div></div>
               
               
               {inputFields.map((item, index) => (
                 <Fragment key={index}>
-                <input className={`${styles.itemListInput} light fs-S2`} type="text" id={`itemName_${item.id}`} value={item.itemName} onChange={(e) => handleChange(item.id, 'itemName', e.target.value)} key={item.id}/>
-                <input className={`${styles.noArrow} light fs-S2`} type="number" id={`quantity_${item.id}`} value={item.quantity} onChange={(e) => handleChange(item.id, 'quantity', e.target.value)}/>
-                <input className={`${styles.noArrow} light fs-S2`} type="number" id={`price_${item.id}`} value={item.price} onChange={(e) => handleChange(item.id, 'price', e.target.value)}/>
+                <input className={`${styles.itemListInput} ${theme} fs-S2`} type="text" id={`itemName_${item.id}`} value={item.itemName} onChange={(e) => handleChange(item.id, 'itemName', e.target.value)} key={item.id}/>
+                <input className={`${styles.noArrow} ${theme} fs-S2`} type="number" id={`quantity_${item.id}`} value={item.quantity} onChange={(e) => handleChange(item.id, 'quantity', e.target.value)}/>
+                <input className={`${styles.noArrow} ${theme} fs-S2`} type="number" id={`price_${item.id}`} value={item.price} onChange={(e) => handleChange(item.id, 'price', e.target.value)}/>
                 <div className={`ff-sanserif ${styles.total} ${styles.center}`}>{(item.price * item.quantity).toFixed(2)}</div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="16" viewBox="0 0 13 16" fill="none" onClick={(e) => handleDeleteInputField(e, index)}>
                   <path fillRule="evenodd" clipRule="evenodd" d="M8.47225 0L9.36117 0.888875H12.4722V2.66667H0.027832V0.888875H3.13892L4.02783 0H8.47225ZM2.6945 16C1.71225 16 0.916707 15.2045 0.916707 14.2222V3.55554H11.5834V14.2222C11.5834 15.2045 10.7878 16 9.80562 16H2.6945Z" fill="#888EB0"/>
@@ -295,6 +298,7 @@ export default function EditInvoice(props) {
             </div>
             <AddNewItem
               Click={handleAddInputField}
+              theme={theme}
             />
           </div>
         </div>

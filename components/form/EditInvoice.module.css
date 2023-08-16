@@ -15,7 +15,7 @@
 }
 
 .form {
-  background-color: #fff;
+  
   padding-inline: 6rem 3.5rem;
   border-radius: 0px 20px 20px 0px;
   position: absolute;
@@ -25,10 +25,19 @@
   max-height: 100vh;
   transition: left 0.8s ease;
   max-width: 50.5vw;
+  transition: background-color 0.5s ease-in;
 }
 
 .form.show {
   left: 80px;
+}
+
+.form:global(.light) {
+  background-color: #FFF;
+}
+
+.form:global(.dark) {
+  background-color: #141625;
 }
 
 .form::-webkit-scrollbar-track {
@@ -65,6 +74,13 @@
 }
 .header {
   margin-top: 59px;
+  transition: color 0.5s ease-in;
+}
+.header:global(.light) {
+  color: #0C0E16
+}
+.header:global(.dark) {
+  color: #FFF
 }
 
 .section {

@@ -18,12 +18,12 @@ export default function InvoiceItem(props) {
 
 
   return (
-    <div className={`${styles.main} ff-sanserif`} onClick={handleClick}>
-      <h1 className={`${styles.title} fs-S2`}><span className={`${styles.symbol}`}>#</span>{props.id}</h1>
-      <p className={`${styles.date} fs-body`}>Due {dueDate}</p>
-      <p className={`${styles.name} fs-body`}>{props.name}</p>
+    <div className={`${styles.main} ff-sanserif ${props.theme}`} onClick={handleClick}>
+      <h1 className={`${styles.title} fs-S2 ${props.theme}`}><span className={`${styles.symbol}`}>#</span>{props.id}</h1>
+      <p className={`${styles.date} fs-body ${props.theme}`}>Due {dueDate}</p>
+      <p className={`${styles.name} fs-body ${props.theme}`}>{props.name}</p>
       {/* <div className={`${styles.gap}`}></div> */}
-      <h1 className={`${styles.price} fs-S`}>$ {props.total}</h1>
+      <h1 className={`${styles.price} fs-S ${props.theme}`}>$ {props.total}</h1>
 
       <div className={`${styles.container}`}>
         <InvoiceStatus status={status} />

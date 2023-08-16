@@ -5,6 +5,7 @@ import InvoiceStatus from "@/components/invoices/InvoiceStatus";
 import { useContext, useEffect, useRef, useState } from "react";
 import useSWR from 'swr';
 import { InvoiceContext } from "@/InvoiceContext";
+import { ThemeContext } from "@/ThemeContext";
 
 export default function InvoicesPage() {
   // useEffect(() => {
@@ -13,7 +14,8 @@ export default function InvoicesPage() {
   // },[])
   const [showForm, setShowForm] = useState(false)
   const { InvoiceData } = useContext(InvoiceContext)
-  // const form = document.querySelector('form');
+  const { theme, updateTheme } = useContext(ThemeContext)
+  
 
   let temp = [];
   
@@ -25,7 +27,6 @@ export default function InvoicesPage() {
     //   top: 0,
     //   behavior:'smooth'
     // })
-
   }
 
   const [loadedInvoices, setLoadedInvoices] = useState([])
@@ -112,6 +113,7 @@ export default function InvoicesPage() {
         onClick={AddNewInvoice}
         count={loadedInvoices.length}
         onCheckboxChange={handleCheckboxChange}
+        theme={theme}
        />
       <div className="invoicePage">
         {loadedInvoices.map((item, index) => (
@@ -122,6 +124,7 @@ export default function InvoicesPage() {
             name={item.clientName}
             total={(item.total) ? (item.total).toFixed(2) : 0}
             status={item.status}
+            theme={theme}
             
           />
           
@@ -132,6 +135,7 @@ export default function InvoicesPage() {
         <NewInvoice
             show={showForm}
             discardClick={AddNewInvoice}
+            theme={theme}
         />
       {(loadedInvoices.length === 0) && <div className="no-invoices">
         <div>

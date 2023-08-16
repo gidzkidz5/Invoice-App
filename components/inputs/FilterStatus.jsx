@@ -46,7 +46,7 @@ export default function FilterStatus(props) {
         className={`${styles.main} ff-sanserif fs-S2 flex`}
         onClick={rotateArrow}
       >
-        <span className={`${styles.text}`}>Filter by status</span>
+        <span className={`${styles.text} ${props.theme}`}>Filter by status</span>
         <svg
           className={dropdown ? `${styles.arrow}` : `${styles.arrowDefault}`}
           width="11"

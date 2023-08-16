@@ -1,5 +1,5 @@
 .btn {
-    background-color: #F9FAFE;
+    
     color: #7E88C3;
     text-align: center;
     
@@ -9,6 +9,15 @@
     gap: 0.5rem;
     padding-inline: 115px;
     width: 100%;
+    transition: background-color 0.25s ease-in 0.15s
+
+}
+
+.btn:global(.light) {
+    background-color: #F9FAFE;
+}
+.btn:global(.dark) {
+    background-color: #252945;
 
 }
 

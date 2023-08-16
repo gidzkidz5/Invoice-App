@@ -14,12 +14,21 @@
     overflow-y: scroll;
     max-height: 100vh;
     transition: left 0.8s ease;
+    max-width: 50.5vw
 
     /* display: none; */
 }
 
 .form.show {
     left: 80px;
+}
+
+.form:global(.light) {
+    background-color: #FFF;
+}
+
+.form:global(.dark) {
+    background-color: #141625;
 }
 
 .form::-webkit-scrollbar-track
@@ -64,6 +73,12 @@
 .header {
     margin-top: 59px;
 }
+.header:global(.light) {
+    color: #0C0E16
+}
+.header:global(.dark) {
+    color: #FFF
+}
 
 .section {
     display: flex;
@@ -81,7 +96,7 @@
     gap: 9px;
 }
 
-.itemList {
+/* .itemList {
     display: grid;
     grid-template-columns: 0.42fr 0.091fr 0.2fr minmax(40px, 0.2fr);
     column-gap: 1rem;
@@ -91,7 +106,25 @@
     margin-bottom: 18px;
     min-width: 100%;
  
-}
+} */
+.itemList {
+    display: grid;
+    grid-template-columns: minmax(200px, 5fr) minmax(40px, 1fr) minmax(100px, 2fr) minmax(
+        40px,
+        2fr
+      ) minmax(12px, 18px);
+    /* grid-template-columns: 3fr 1fr 1fr 1fr minmax(12px, 18px); */
+  
+    column-gap: 1rem;
+    row-gap: 1rem;
+  
+    grid-auto-rows: minmax(30px, auto);
+    margin-bottom: 18px;
+    max-width: 100%;
+    align-items: center;
+  
+    /* min-width: 100%; */
+  }
 
 .itemList label{
     margin-bottom: 15px;
@@ -101,6 +134,18 @@
     width: 100%;
     max-width: fit-content;
 }
+.total {
+    color: #888eb0;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 15px; /* 100% */
+    letter-spacing: -0.25px;
+}
+  
+.center {
+      justify-self: center;
+}  
 
 .btnContainer {
     display:flex;

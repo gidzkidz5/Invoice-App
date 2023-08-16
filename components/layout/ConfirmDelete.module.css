@@ -1,0 +1,26 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-radius: 8px;
+    background: #FFF;
+    box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.10);
+    padding: 3rem;
+    width: 33.333vw;
+    max-width: 500px;
+   
+
+  
+    /* top: 32.5%; */
+}
+
+.main p{
+    color: #888EB0;
+}
+
+.btnContainer {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-top: 5px;
+}

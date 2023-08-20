@@ -194,8 +194,37 @@ background:#1E2139
   padding-inline: 21vw 20vw;
   gap: 4rem;
   padding-top: 9.8vh;
-  
- 
+}
+
+.backLink {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-self: flex-start;
+  gap: 1.5rem;
+}
+
+.backLink.light:hover, 
+.backLink.dark:hover {
+  color: #888EB0;
+}
+
+.backLink svg {
+ vertical-align: middle;
+ position: relative;
+ bottom: 2px;
+}
+
+.backLink span {
+  vertical-align: middle;
+}
+
+.backLink.light {
+  color:#0C0E16;
+}
+
+.backLink.dark {
+  color: #FFF;
 }
 
 /* Tablet */

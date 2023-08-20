@@ -25,7 +25,7 @@
   max-height: 100vh;
   transition: left 0.8s ease;
   max-width: 50.5vw;
-  transition: background-color 0.5s ease-in;
+ 
 }
 
 .form.show {
@@ -34,10 +34,12 @@
 
 .form:global(.light) {
   background-color: #FFF;
+  
 }
 
 .form:global(.dark) {
   background-color: #141625;
+ 
 }
 
 .form::-webkit-scrollbar-track {

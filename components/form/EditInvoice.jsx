@@ -89,6 +89,8 @@ export default function EditInvoice(props) {
     const clientDateRef = useRef();
     const clientPaymentTermsRef = useRef();
     const clientDescriptionRef = useRef();
+
+    const [isInputError, setisInputError] = useState(false);
   
     async function editCurrentInvoice(inputs) {
 
@@ -103,7 +105,10 @@ export default function EditInvoice(props) {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "something went wrong!")
+        setisInputError(true)
+      } else {
+        setisInputError(false)
+        window.location.reload()
       }
 
       return data
@@ -146,6 +151,10 @@ export default function EditInvoice(props) {
 
       const dueDate = addDaysToDate(clientDateRef.current.value, parseInt(clientPaymentTermsRef.current.value));
 
+      if (!senderAddress.street) {
+        
+      }
+
       const updatedData = {
         ...data,
         id: props.loadedData.id, //to change
@@ -181,8 +190,7 @@ export default function EditInvoice(props) {
       const result = await editCurrentInvoice(updatedData)
       
       console.log(result)
-      window.location.reload();
-      
+     
       return result
 
   }

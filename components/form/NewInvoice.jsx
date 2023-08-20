@@ -80,6 +80,8 @@ export default function NewInvoice(props) {
     const clientDateRef = useRef();
     const clientPaymentTermsRef = useRef();
     const clientDescriptionRef = useRef();
+
+    const [isInputError, setisInputError] = useState(false);
   
     async function createNewInvoice(inputs) {
 
@@ -94,7 +96,12 @@ export default function NewInvoice(props) {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "something went wrong!")
+        // throw new Error(data.message || "something went wrong!")
+        setisInputError(true);
+        console.log(isInputError)
+      } else {
+        window.location.reload();
+        setisInputError(false);
       }
 
       return data
@@ -181,7 +188,10 @@ export default function NewInvoice(props) {
       const result = await createNewInvoice(updatedData)
       
       console.log(result)
-      window.location.reload();
+      // if (!isInputError) {
+      //   window.location.reload();
+      // }
+      
       
       return result
 

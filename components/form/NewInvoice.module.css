@@ -88,6 +88,7 @@
 .parent {
     display: flex;
     gap: 1.5rem;
+    flex-wrap: wrap;
 }
 
 .child {
@@ -159,12 +160,20 @@
     gap: 8px;
 }
 
+
 /* Tablet */
 
 @media only screen and (min-width: 64.01em) and (max-width: 80em) {
     .form {
         left: -75vw;
-       
+    }
+    .parent {
+        flex-wrap: wrap;
+        width: 100%;
+        overflow: hidden;
+    }
+    .child input {
+        max-width: 100%;
     }
 }
 
@@ -173,11 +182,25 @@
         left:  -150vw;
         top: 80px;
     }
+    
 
     .form.show {
         left: 0;
         top: 80px;
-        padding-inline: 2rem;;
+        padding-inline: 2rem;
+        max-width: 80.2vw;
+    }
+
+
+    .parent {
+        flex-wrap: wrap;
+        width: 100%;
+        overflow: hidden;
+
+    }
+
+    .child input {
+        max-width: 100%;
     }
 }
 

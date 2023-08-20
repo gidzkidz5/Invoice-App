@@ -1,16 +1,21 @@
 import DetailedInvoice from "@/components/invoices/DetailedInvoice";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { capitalizeFirstLetter } from "@/helpers/others-util";
 import EditInvoice from "@/components/form/EditInvoice";
 import ConfirmDelete from "@/components/layout/ConfirmDelete";
-export default function DetailedInvoicePage() {
+import connectDatabase from "@/helpers/db-util";
+import Link from "next/link";
+import { ThemeContext } from "@/ThemeContext";
+
+export default function DetailedInvoicePage(props) {
   const router = useRouter();
 
-  const [loadedInvoice, setLoadedInvoice] = useState();
+  const [loadedInvoice, setLoadedInvoice] = useState(props.data);
   const [isBlank, setIsBlank] = useState(false);
   const [showForm, setShowForm] = useState(false)
   const [showDelete, setShowDelete] = useState(false);
+  const {theme} = useContext(ThemeContext)
   
   function showInvoice(e) {
     e.preventDefault();
@@ -60,6 +65,9 @@ export default function DetailedInvoicePage() {
 
   return (
     <>
+    
+    
+    
     <DetailedInvoice
       status={capitalizeFirstLetter(loadedInvoice.status)}
       id={loadedInvoice.id}
@@ -97,3 +105,35 @@ export default function DetailedInvoicePage() {
     </>
   );
 }
+
+export async function getServerSideProps(context) {
+  const invoiceId = context.params.id;
+
+  const client = await connectDatabase();
+
+  const db = client.db();
+
+  const result = await db.collection("Invoices").findOne({ id: invoiceId });
+
+  const data = JSON.parse(JSON.stringify(result))
+  
+
+  return {
+    props: {
+      data: data
+    }
+  }
+
+  
+
+  
+}
+// if (req.method === "GET") {
+//   const result = await db.collection("Invoices").findOne({ id: invoiceId });
+
+//   //   console.log(result)
+//   if(!result) {
+//       return res.status(404).json({error: "No invoices found"})
+//   } 
+//   res.status(200).json({ result });
+// }

@@ -18,7 +18,7 @@
   max-height: 5.5rem;
   align-items: center;
   /* margin-bottom: 1.5rem; */
-  transition: background-color 0.4s ease-in 0.15s;
+  transition: background-color 0.15s ease-in 0.05s;
 }
 
 .header:global(.light) {
@@ -64,7 +64,7 @@
 
   box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.1);
   padding: 3rem;
-  transition: background-color 0.4s ease-in 0.15s
+  transition: background-color 0.2s ease-in 0.05s
 }
 .detailsParent:global(.light) {
   background: #fff;
@@ -134,7 +134,7 @@
 
 .detailsCharges {
   border-radius: 8px 8px 0px 0px;
-  transition: background-color 0.4s ease-in 0.15s;
+  transition: background-color 0.25s ease-in 0.05s;
   width: 100%;
 }
 .detailsCharges:global(.light) {
@@ -216,6 +216,16 @@
   .detailsParent {
     display: flex;
     flex-direction: column;
+    padding:1.5rem;
+  }
+
+  .detailsTitle {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .titleAddress {
+    text-align: left ;
   }
 
   .main {
@@ -288,6 +298,11 @@
 
   .chargesTop {
     display: block;
+    padding: 1.5rem;
   
+  }
+
+  .chargesBottom {
+    padding: 1.5rem;
   }
 }

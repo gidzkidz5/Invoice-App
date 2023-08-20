@@ -8,6 +8,30 @@ export default async function handler(req, res) {
       console.log(req.body)
       const { id, createdAt, paymentDue, description, paymentTerms, clientName, clientEmail, status, senderAddress, clientAddress, items, total } = req.body;
 
+      if (
+        !createdAt ||
+        !paymentDue ||
+        !description ||
+        !paymentTerms ||
+        !clientName ||
+        !clientEmail ||
+        !senderAddress.street ||
+        !senderAddress.city ||
+        !senderAddress.postCode ||
+        !senderAddress.country ||
+        !clientAddress.street ||
+        !clientAddress.city ||
+        !clientAddress.postCode ||
+        !clientAddress.country ||
+        !items[0].name ||
+        total == 0
+      ) {
+        res.status(422).json({
+          message: "Can't be blank"
+        })
+        return;
+      }
+
       const client = await connectDatabase();
   
       const db = client.db();

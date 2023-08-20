@@ -7,6 +7,7 @@ import InvoiceStatus from "./InvoiceStatus";
 import { Fragment, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { ThemeContext } from "@/ThemeContext";
+import Link from "next/link";
 
 export default function DetailedInvoice(props) {
   //Theme
@@ -57,7 +58,7 @@ export default function DetailedInvoice(props) {
   }, [wantedStatus, path, props.status]);
 
   // screen width
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState();
 
   useEffect(() => {
     const handleResize = () => {
@@ -86,10 +87,19 @@ export default function DetailedInvoice(props) {
     // Desktop
     screenSize = "desktop";
   }
+  
 
   return (
     <>
+    
       <div className={`${styles.main} ff-sanserif`}>
+      <Link className={`backLink ff-sanserif fs-S2 ${theme}`}href={"../invoices"}>
+      <div>
+        <svg width="10" height="10" xmlns="http://www.w3.org/2000/svg"><path d="M6.342.886L2.114 5.114l4.228 4.228" stroke="#9277FF" strokeWidth="2" fill="none" fillRule="evenodd"/>
+        </svg>
+      </div>
+      <span>Go Back</span>
+    </Link>
         <section className={`${styles.header} ${theme}`}>
           <div className={`${styles.statusContainer}`}>
             <p className={`fs-body ${styles.grey} ${theme}`}>Status</p>

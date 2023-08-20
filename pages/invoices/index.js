@@ -2,21 +2,29 @@ import NewInvoice from "@/components/form/NewInvoice";
 import InvoiceItem from "@/components/invoices/InvoiceItem";
 import InvoicePageHeader from "@/components/invoices/InvoicePageHeader";
 import InvoiceStatus from "@/components/invoices/InvoiceStatus";
-import { useContext, useEffect, useRef, useState } from "react";
+import { Suspense, useContext, useEffect, useRef, useState } from "react";
 import useSWR from 'swr';
 import { InvoiceContext } from "@/InvoiceContext";
 import { ThemeContext } from "@/ThemeContext";
+import connectDatabase from "@/helpers/db-util";
+import { Router } from "next/router";
 
-export default function InvoicesPage() {
-  // useEffect(() => {
-  //     const body = document.getElementById("__next")
-  //     body.classList.add('light')
-  // },[])
+export default function InvoicesPage(props) {
   const [showForm, setShowForm] = useState(false)
-  const { InvoiceData } = useContext(InvoiceContext)
-  const { theme, updateTheme } = useContext(ThemeContext)
+  const [isLoading, setIsLoading] = useState(true)
+  const { InvoiceData, setInvoiceData } = useContext(InvoiceContext)
+  const { theme } = useContext(ThemeContext)
   
-
+  useEffect(() => {
+    setInvoiceData({
+      filterStatus: {
+        draft: false,
+        paid: false,
+        pending: false
+      }
+    })
+  },[])
+ 
   let temp = [];
   
   function AddNewInvoice(e) {
@@ -29,7 +37,7 @@ export default function InvoicesPage() {
     // })
   }
 
-  const [loadedInvoices, setLoadedInvoices] = useState([])
+  const [loadedInvoices, setLoadedInvoices] = useState([props.data])
 
 
   const { data, error } = useSWR(
@@ -40,7 +48,7 @@ export default function InvoicesPage() {
   useEffect(() => {
     if (data) {
       //add filter params here
-     
+      
       let finalFilteredData = []
       let filteredData;
       
@@ -81,6 +89,7 @@ export default function InvoicesPage() {
         console.log(finalFilteredData, "finalFilteredData")
         
         setLoadedInvoices(finalFilteredData)
+        setIsLoading(false);
         // console.log(loadedInvoices, "loadedInvoices")
         // console.log(data.result)
        
@@ -96,12 +105,12 @@ export default function InvoicesPage() {
   //checkboxes 
   const [checked, setChecked] = useState([false, false ,false])
     
-    function handleCheckboxChange(index) {
-        setChecked(
-            checked.map((isChecked, i) => (i === index ? !isChecked : isChecked))
-          )
-    }
-
+  function handleCheckboxChange(index) {
+      setChecked(
+          checked.map((isChecked, i) => (i === index ? !isChecked : isChecked))
+        )
+  }
+    
 
   if (loadedInvoices.length === 0) {
     return <p>Loading...</p>
@@ -115,8 +124,9 @@ export default function InvoicesPage() {
         onCheckboxChange={handleCheckboxChange}
         theme={theme}
        />
+
       <div className="invoicePage">
-        {loadedInvoices.map((item, index) => (
+        {isLoading ? <p>Loading...</p> : loadedInvoices.map((item, index) => (
           <InvoiceItem
             key={index}
             id={item.id}
@@ -127,10 +137,8 @@ export default function InvoicesPage() {
             theme={theme}
             
           />
-          
         ))}
 
-        
         </div>
         <NewInvoice
             show={showForm}
@@ -438,4 +446,39 @@ export default function InvoicesPage() {
       </div>}
     </>
   );
+}
+
+// export async function getStaticProps() {
+//   const client = await connectDatabase();
+
+//   const db = client.db();
+
+//   const result = await db.collection("Invoices").find().toArray();
+
+//   const data = result.map(doc => JSON.parse(JSON.stringify(doc)));
+
+  
+  
+//   return {
+//     props: {
+//       data: data
+//     },
+//     revalidate: 60
+//   }
+// }
+
+export async function getServerSideProps() {
+  const client = await connectDatabase();
+
+  const db = client.db();
+
+  const result = await db.collection("Invoices").find().toArray();
+
+  const data = result.map(doc => JSON.parse(JSON.stringify(doc)));
+  
+  return {
+    props: {
+      data: data
+    }
+  }
 }

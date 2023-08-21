@@ -87,14 +87,23 @@
 }
 .parent {
     display: flex;
-    gap: 1.5rem;
+    /* gap: 1.5rem; */
+    justify-content: space-between;
     flex-wrap: wrap;
+}
+
+.parent.parentPickers {
+    justify-content:space-between;
 }
 
 .child {
     display: flex;
     flex-direction: column;
     gap: 9px;
+}
+
+.child.small {
+    width: 31.5%;
 }
 
 /* .itemList {
@@ -133,7 +142,7 @@
 
 .itemListInput {
     width: 100%;
-    max-width: fit-content;
+    /* max-width: fit-content; */
 }
 .total {
     color: #888eb0;
@@ -158,6 +167,11 @@
 .btnChild {
     display: flex;
     gap: 8px;
+}
+
+.number.noPadding {
+    padding-block: 1rem;
+    min-width: 50px;
 }
 
 

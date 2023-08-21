@@ -213,17 +213,17 @@ export default function EditInvoice(props) {
             </div>
 
             <div className={`${styles.parent}`}>
-              <div className={`${styles.child}`}>
+              <div className={`${styles.child} ${styles.small}`}>
                 <label className={`${theme} fs-body`} htmlFor="city">City</label>
                 <input className={`${theme} fs-S2`} type="text" ref={sellerCityRef}/>
               </div>
 
-              <div className={`${styles.child}`}>
+              <div className={`${styles.child} ${styles.small}`}>
                 <label className={`${theme} fs-body"`} htmlFor="postcode">Post Code</label>
                 <input className={`${theme} fs-S2`} type="text" ref={sellerPostCodeRef}/>
               </div>
 
-              <div className={`${styles.child}`}>
+              <div className={`${styles.child} ${styles.small}`}>
                 <label className={`${theme} fs-body`} htmlFor="country">Country</label>
                 <input className={`${theme} fs-S2`} type="text" ref={sellerCountryRef}/>
               </div>
@@ -249,15 +249,15 @@ export default function EditInvoice(props) {
             </div>
 
             <div className={`${styles.parent}`}>
-              <div className={`${styles.child}`}>
+              <div className={`${styles.child} ${styles.small}`}>
                 <label className={`${theme} fs-body`} htmlFor="clientCity">City</label>
                 <input className={`${theme} fs-S2`} id="clientCity" type="text" ref={clientCityRef}/>
               </div>
-              <div className={`${styles.child}`}>
+              <div className={`${styles.child} ${styles.small}`}>
                 <label className={`${theme} fs-body`} htmlFor="clientPostCode">Post Code</label>
                 <input className={`${theme} fs-S2`} id="clientPostCode" type="text" ref={clientPostCodeRef}/>
               </div>
-              <div className={`${styles.child}`}>
+              <div className={`${styles.child} ${styles.small}`}>
                 <label className={`${theme} fs-body`} htmlFor="clientCountry">Country</label>
                 <input className={`${theme} fs-S2`} id="clientCountry" type="text" ref={clientCountryRef}/>
               </div>
@@ -295,8 +295,8 @@ export default function EditInvoice(props) {
               {inputFields.map((item, index) => (
                 <Fragment key={index}>
                 <input className={`${styles.itemListInput} ${theme} fs-S2`} type="text" id={`itemName_${item.id}`} value={item.itemName} onChange={(e) => handleChange(item.id, 'itemName', e.target.value)} key={item.id}/>
-                <input className={`${styles.noArrow} ${theme} fs-S2`} type="number" id={`quantity_${item.id}`} value={item.quantity} onChange={(e) => handleChange(item.id, 'quantity', e.target.value)}/>
-                <input className={`${styles.noArrow} ${theme} fs-S2`} type="number" id={`price_${item.id}`} value={item.price} onChange={(e) => handleChange(item.id, 'price', e.target.value)}/>
+                <input className={`${styles.noArrow} ${theme} fs-S2 ${styles.number} ${styles.noPadding}`} type="number" id={`quantity_${item.id}`} value={item.quantity} onChange={(e) => handleChange(item.id, 'quantity', e.target.value)}/>
+                <input className={`${styles.noArrow} ${theme} fs-S2 ${styles.number} ${styles.noPadding}`} type="number" id={`price_${item.id}`} value={item.price} onChange={(e) => handleChange(item.id, 'price', e.target.value)}/>
                 <div className={`ff-sanserif ${styles.total} ${styles.center}`}>{(item.price * item.quantity).toFixed(2)}</div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="16" viewBox="0 0 13 16" fill="none" onClick={(e) => handleDeleteInputField(e, index)}>
                   <path fillRule="evenodd" clipRule="evenodd" d="M8.47225 0L9.36117 0.888875H12.4722V2.66667H0.027832V0.888875H3.13892L4.02783 0H8.47225ZM2.6945 16C1.71225 16 0.916707 15.2045 0.916707 14.2222V3.55554H11.5834V14.2222C11.5834 15.2045 10.7878 16 9.80562 16H2.6945Z" fill="#888EB0"/>

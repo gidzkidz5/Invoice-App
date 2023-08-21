@@ -38,3 +38,14 @@
     flex-direction: column;
     gap: 9px;
 }
+@media only screen and (min-width: 74em) {
+    .child {
+       width: 48.5%;
+    }
+}
+
+@media only screen and (min-width: 45em) and (max-width: 74em) {
+    .child {
+        width: 48.5%;
+    }
+}

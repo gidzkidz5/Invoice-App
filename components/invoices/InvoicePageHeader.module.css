@@ -33,6 +33,7 @@
 }
 
 @media only screen and (max-width: 35em) {
+    
     .textmain h1{
         font-family: League Spartan;
         font-size: 24px;
@@ -40,6 +41,10 @@
         font-weight: 700;
         line-height: normal;
         letter-spacing: -0.75px;
+    }
+
+    .textmain {
+        width: 35%;
     }
 
     .textmain p {
@@ -59,5 +64,6 @@
         min-width: 180px;
         align-items: center;
         justify-content: space-between;
+        width: 58%;
     }
 }

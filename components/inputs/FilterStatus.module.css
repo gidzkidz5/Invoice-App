@@ -1,6 +1,7 @@
 .parent {
     height: fit-content;
     position: relative;
+    
 }
 .main {
   gap: 14px;
@@ -66,7 +67,7 @@
   }
 
   .text {
-    width: min-content;
+    width: max-content;
   }
 }
 

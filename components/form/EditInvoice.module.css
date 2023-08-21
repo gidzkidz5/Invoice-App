@@ -94,11 +94,13 @@
   display: flex;
   gap: 1.5rem;
   width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 .parent.pickers {
-  display: grid;
+  /* display: grid;
   width: 100%;
-  grid-template-columns: repeat(2, minmax(0, 700px));
+  grid-template-columns: repeat(2, minmax(0, 700px)); */
 }
 
 .child {
@@ -108,8 +110,8 @@
   flex: 1;
 }
 
-.child input {
-  width: 100%;
+.child.small {
+  width: 31.5%;
 }
 
 .child input[type="date"] {
@@ -141,7 +143,7 @@
 
 .itemListInput {
   width: 100%;
-  max-width: fit-content;
+  /* max-width: max-content; */
 }
 
 .total {
@@ -173,6 +175,11 @@
 .fullWidth.fullWidth2 {
   width: 100%;
   max-width: 100%;
+}
+
+.number.noPadding {
+  padding-block: 1rem;
+  min-width: 50px;
 }
 
 

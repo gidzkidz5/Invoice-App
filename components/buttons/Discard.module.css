@@ -6,3 +6,26 @@
 .discard:hover {
     background-color: #DFE3FA;
 }
+
+.discard:global(.dark) {
+    background-color: #F9FAFE;
+}
+
+.cancel:global(.light) {
+    background-color: #F9FAFE;
+    color: #7E88C3;
+}
+
+.cancel:global(.light):hover {
+    background-color: #DFE3FA;
+}
+
+.cancel:global(.dark) {
+    background-color: #252945;
+    color: #7E88C3;
+}
+
+.cancel:global(.dark):hover {
+    background-color: #DFE3FA;
+}
+

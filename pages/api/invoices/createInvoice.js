@@ -6,6 +6,15 @@ export default async function handler(req, res) {
       console.log(req.body)
       const {createdAt, paymentDue, description, paymentTerms, clientName, clientEmail, senderAddress, clientAddress, items, total } = req.body;
 
+      function checkItems(itemsArray) {
+        let isInvalid = false;
+        itemsArray.forEach(item => {
+            if ((item.name) || (item.quantity == 0 )|| (item.price == 0)) {
+              isInvalid = true
+            } 
+        });
+        return isInvalid
+      }
       if (
         !createdAt ||
         !paymentDue ||
@@ -15,7 +24,7 @@ export default async function handler(req, res) {
         !clientEmail ||
         !senderAddress ||
         !clientAddress ||
-        !items[0].name ||
+        checkItems(items) ||
         total == 0
       ) {
         res.status(422).json({

@@ -25,7 +25,7 @@
   max-height: 100vh;
   transition: left 0.8s ease;
   max-width: 50.5vw;
- 
+  z-index: 10000;
 }
 
 .form.show {

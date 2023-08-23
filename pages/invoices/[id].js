@@ -96,6 +96,7 @@ export default function DetailedInvoicePage(props) {
         loadedData={loadedInvoice}
         onClick={showInvoice}
     />
+    {showForm && <div className="darkenBg2"></div>}
     {(showDelete) && <div className="darkenBg">
       <ConfirmDelete
           deleteClick={deleteInvoice}

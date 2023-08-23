@@ -146,6 +146,7 @@ export default function InvoicesPage(props) {
             discardClick={AddNewInvoice}
             theme={theme}
         />
+        {showForm && <div className="darkenBg2"></div>}
       {(loadedInvoices.length === 0) && <div className="no-invoices">
         <div>
           <svg width="242" height="200" xmlns="http://www.w3.org/2000/svg">

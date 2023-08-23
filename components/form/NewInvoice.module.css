@@ -14,7 +14,8 @@
     overflow-y: scroll;
     max-height: 100vh;
     transition: left 0.8s ease;
-    max-width: 60.5vw
+    max-width: 60.5vw;
+    z-index: 1000;
 
     /* display: none; */
 }

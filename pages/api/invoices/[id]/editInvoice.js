@@ -5,8 +5,17 @@ export default async function handler(req, res) {
     const invoiceId = req.query.id;
 
     if (req.method === 'PATCH') {
-      console.log(req.body)
       const { id, createdAt, paymentDue, description, paymentTerms, clientName, clientEmail, status, senderAddress, clientAddress, items, total } = req.body;
+
+      function checkItems(itemsArray) {
+        let isInvalid = false;
+        itemsArray.forEach(item => {
+            if ((item.name) || (item.quantity == 0 )|| (item.price == 0)) {
+              isInvalid = true
+            } 
+        });
+        return isInvalid
+      }
 
       if (
         !createdAt ||
@@ -23,15 +32,17 @@ export default async function handler(req, res) {
         !clientAddress.city ||
         !clientAddress.postCode ||
         !clientAddress.country ||
-        !items[0].name ||
+        checkItems(items) ||
         total == 0
       ) {
         res.status(422).json({
           message: "Can't be blank"
         })
+
         return;
       }
 
+      console.log(req.body)
       const client = await connectDatabase();
   
       const db = client.db();

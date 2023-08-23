@@ -22,6 +22,7 @@ export default function InvoicesPage(props) {
         paid: false,
         pending: false
       }
+
     })
   },[])
  

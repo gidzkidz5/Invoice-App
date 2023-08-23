@@ -24,8 +24,9 @@
   overflow-y: scroll;
   max-height: 100vh;
   transition: left 0.8s ease;
-  max-width: 50.5vw;
   z-index: 10000;
+  max-width: 60.5vw;
+
 }
 
 .form.show {
@@ -108,6 +109,7 @@
   flex-direction: column;
   gap: 9px;
   flex: 1;
+  position: relative;
 }
 
 .child.small {
@@ -181,6 +183,64 @@
   padding-block: 1rem;
   min-width: 50px;
 }
+
+.errorInput.show {
+  border-color: #EC5757;
+  outline: #EC5757;
+}
+
+.error {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #EC5757;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 15px;
+  letter-spacing: -0.208px;
+}
+.errorPickers,
+.errorPickers div {
+  position: relative;
+}
+.errorPickers.show > div:nth-child(1)::after {
+  content: "can't be blank";
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #EC5757;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 15px;
+  letter-spacing: -0.208px;
+}
+
+.errorPickers.show div input {
+  border-color: #EC5757;
+  outline: #EC5757;
+}
+
+.errorPickers.show div:nth-child(1) label {
+  color: #EC5757;
+}
+
+.errorLabel:global(.light).show,
+.errorLabel:global(.dark).show {
+  color: #EC5757;
+}
+
+.itemNameError.show:global(.dark),
+.itemNameError.show:global(.light),
+.itemQuantityError.show:global(.dark),
+.itemQuantityError.show:global(.light),
+.itemPriceError.show:global(.dark),
+.itemPriceError.show:global(.light) {
+  border-color: #EC5757;
+  outline: #EC5757;
+}
+
 
 
 /* Tablet */

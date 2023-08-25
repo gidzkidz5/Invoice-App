@@ -22,9 +22,26 @@ export default function DetailedInvoicePage(props) {
     setShowForm(!showForm)
   }
 
-  function deleteInvoice(e) {
+  async function deleteInvoice(e) {
     e.preventDefault();
     showDeleteBg(e)
+    const response = await fetch(`../api/invoices/${router.query.id}/editInvoice`,
+      {
+        method: 'DELETE',
+        body: JSON.stringify(router.query.id),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    )
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.log("did not delete")
+    } else {
+      window.location.reload();
+    }
   }
 
   function showDeleteBg(e) {
@@ -65,9 +82,6 @@ export default function DetailedInvoicePage(props) {
 
   return (
     <>
-    
-    
-    
     <DetailedInvoice
       status={capitalizeFirstLetter(loadedInvoice.status)}
       id={loadedInvoice.id}

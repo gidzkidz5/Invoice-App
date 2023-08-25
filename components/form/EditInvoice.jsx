@@ -155,10 +155,7 @@ export default function EditInvoice(props) {
       quantity: single.quantity,
     }));
 
-    console.log(newData, "TESTDIN");
     setInputFields(newData);
-
-    console.log(inputFields, "after");
   }, [props]);
 
   async function handleClick(e, whatStatus) {

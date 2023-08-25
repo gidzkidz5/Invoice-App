@@ -38,3 +38,23 @@ export function addDaysToDate(dateString, daysToAdd) {
     // Format the date as "YYYY-MM-DD" and return it
     return `${year}-${month}-${day}`;
   }
+
+export function validateEmail(email) {
+  // Regular expression for email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  return emailRegex.test(email);
+}
+
+export function idGenerator() {
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const numbers = '0123456789';
+
+  const randomLetter1 = letters[Math.floor(Math.random() * letters.length)];
+  const randomLetter2 = letters[Math.floor(Math.random() * letters.length)];
+  const randomNumber1 = numbers[Math.floor(Math.random() * numbers.length)];
+  const randomNumber2 = numbers[Math.floor(Math.random() * numbers.length)];
+  const randomNumber3 = numbers[Math.floor(Math.random() * numbers.length)];
+
+  return `${randomLetter1}${randomLetter2}${randomNumber1}${randomNumber2}${randomNumber3}`;
+}

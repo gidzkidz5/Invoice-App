@@ -117,7 +117,7 @@ export default function NewInvoice(props) {
 
       const updatedData = {
         ...data,
-        id: "NE1234", //to change
+        id: "NE1234", //to change by backend
         createdAt: clientDateRef.current.value,
         paymentDue: dueDate,
         description: clientDescriptionRef.current.value,

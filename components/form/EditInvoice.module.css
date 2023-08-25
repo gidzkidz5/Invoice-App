@@ -15,7 +15,6 @@
 }
 
 .form {
-  
   padding-inline: 6rem 3.5rem;
   border-radius: 0px 20px 20px 0px;
   position: absolute;
@@ -24,9 +23,8 @@
   overflow-y: scroll;
   max-height: 100vh;
   transition: left 0.8s ease;
-  z-index: 10000;
+  z-index: 1000;
   max-width: 60.5vw;
-
 }
 
 .form.show {
@@ -35,12 +33,10 @@
 
 .form:global(.light) {
   background-color: #FFF;
-  
 }
 
 .form:global(.dark) {
   background-color: #141625;
- 
 }
 
 .form::-webkit-scrollbar-track {

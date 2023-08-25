@@ -1,4 +1,5 @@
 import connectDatabase from "@/helpers/db-util";
+import { validateEmail } from "@/helpers/others-util";
 
 
 export default async function handler(req, res) {
@@ -10,7 +11,7 @@ export default async function handler(req, res) {
       function checkItems(itemsArray) {
         let isInvalid = false;
         itemsArray.forEach(item => {
-            if ((item.name) || (item.quantity == 0 )|| (item.price == 0)) {
+            if (!(item.name) || (item.quantity == 0 )|| (item.price == 0)) {
               isInvalid = true
             } 
         });
@@ -39,6 +40,15 @@ export default async function handler(req, res) {
           message: "Can't be blank"
         })
 
+        return;
+      }
+
+      if (
+        !validateEmail(clientEmail)
+      ) {
+        res.status(422).json({
+          message: "Invalid Email Format"
+        })
         return;
       }
 

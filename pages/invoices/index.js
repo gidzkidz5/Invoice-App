@@ -450,26 +450,7 @@ export default function InvoicesPage(props) {
   );
 }
 
-// export async function getStaticProps() {
-//   const client = await connectDatabase();
-
-//   const db = client.db();
-
-//   const result = await db.collection("Invoices").find().toArray();
-
-//   const data = result.map(doc => JSON.parse(JSON.stringify(doc)));
-
-  
-  
-//   return {
-//     props: {
-//       data: data
-//     },
-//     revalidate: 60
-//   }
-// }
-
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const client = await connectDatabase();
 
   const db = client.db();
@@ -477,10 +458,29 @@ export async function getServerSideProps() {
   const result = await db.collection("Invoices").find().toArray();
 
   const data = result.map(doc => JSON.parse(JSON.stringify(doc)));
+
+  
   
   return {
     props: {
       data: data
-    }
+    },
+    revalidate: 60
   }
 }
+
+// export async function getServerSideProps() {
+//   const client = await connectDatabase();
+
+//   const db = client.db();
+
+//   const result = await db.collection("Invoices").find().toArray();
+
+//   const data = result.map(doc => JSON.parse(JSON.stringify(doc)));
+  
+//   return {
+//     props: {
+//       data: data
+//     }
+//   }
+// }

@@ -1,21 +1,36 @@
-import Head from 'next/head'
-import { League_Spartan } from 'next/font/google'
-import NewInvoice from '@/components/form/NewInvoice'
-import Image from 'next/image';
+
+import AuthForm from '../components/form/AuthForm';
+import { getSession } from 'next-auth/react';
 import Link from 'next/link';
-
-
-
-const inter = League_Spartan({ subsets: ['latin'] })
-
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    getSession()
+      .then(session => {
+        if (session) {
+          router.replace('/invoices');
+        } else {
+          setIsLoading(false)
+        }
+      })
+  },[router])
+
+  if (isLoading) {
+    return <p>Loading....Auth</p>
+  }
+
+
   return (
     <>
       
      This is the Home Page!
 
-     <Link href="/invoices">Invoices</Link>
+    <AuthForm /> 
       
     </>
   )

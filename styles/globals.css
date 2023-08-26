@@ -2,7 +2,6 @@
 *::after,
 *::before {
     box-sizing: border-box;
-  
 }
 
 html {
@@ -193,6 +192,13 @@ background:#1E2139
 
 #profile-pic-container img{
   border-radius: 40px;
+}
+
+#logout {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  margin-left: 5px;
 }
 
 #body-main {

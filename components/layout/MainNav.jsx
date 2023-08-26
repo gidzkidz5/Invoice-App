@@ -3,13 +3,32 @@ import Head from "next/head";
 import Image from "next/image";
 import { useContext } from "react";
 import { useEffect } from "react";
+import LogoutTwoToneIcon from '@mui/icons-material/LogoutTwoTone';
+import LoginRoundedIcon from '@mui/icons-material/LoginRounded';
+import { signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import { Router, useRouter } from "next/router";
 
 export default function MainNav() {
   const {theme, switchTheme} = useContext(ThemeContext)
+  const router = useRouter();
 
   useEffect(() => {
     document.getElementById("__next").className = theme;
   }, [theme]);
+
+  //session management
+  const { data: session, status } = useSession()
+  const loading = status === "loading"
+
+  function logoutHandler() {
+    signOut();
+  }
+
+  function loginHandler() {
+    router.replace('/');
+  }
+
 
   return (
     <>
@@ -72,6 +91,16 @@ export default function MainNav() {
           </svg>
         </div>
         <div id="themelogo-container">
+          {session && <div id="logout" onClick={logoutHandler}>
+            <LogoutTwoToneIcon 
+              sx={{color: "#7E88C3"}}
+            />
+          </div>}
+          {!session && !loading && <div id="login" onClick={loginHandler}>
+            <LoginRoundedIcon 
+              sx={{color: "#7E88C3"}}
+            />
+          </div>}
           <div id="themelogo" onClick={switchTheme}>
            {theme === 'light' ? <svg
               xmlns="http://www.w3.org/2000/svg"

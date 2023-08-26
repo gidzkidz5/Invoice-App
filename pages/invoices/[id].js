@@ -6,7 +6,8 @@ import EditInvoice from "@/components/form/EditInvoice";
 import ConfirmDelete from "@/components/layout/ConfirmDelete";
 import connectDatabase from "@/helpers/db-util";
 import Link from "next/link";
-import { ThemeContext } from "@/ThemeContext";
+import { getSession, useSession } from "next-auth/react";
+
 
 export default function DetailedInvoicePage(props) {
   const router = useRouter();
@@ -15,7 +16,13 @@ export default function DetailedInvoicePage(props) {
   const [isBlank, setIsBlank] = useState(false);
   const [showForm, setShowForm] = useState(false)
   const [showDelete, setShowDelete] = useState(false);
-  const {theme} = useContext(ThemeContext)
+ 
+
+  //session
+  const [isLoading, setIsLoading] = useState(true)
+  const { session, status } = useSession();
+  const loading = status === "loading"
+
   
   function showInvoice(e) {
     e.preventDefault();
@@ -67,9 +74,18 @@ export default function DetailedInvoicePage(props) {
         console.log(error);
       }
     }
-    if (router.query.id) {
-      fetchData();
-    }
+    getSession()
+        .then(session => {
+          if (!session) {
+            router.push('/')
+          } else {
+            if (router.query.id) {
+              fetchData();
+            }
+          }
+        })
+
+    
   }, [router.query.id]);
 
   if (!loadedInvoice && !isBlank) {
@@ -78,6 +94,10 @@ export default function DetailedInvoicePage(props) {
 
   if (isBlank) {
     return <p>Invoice cannot be found</p>;
+  }
+
+  if (!session) {
+    return <p>Not Authenticated</p>
   }
 
   return (

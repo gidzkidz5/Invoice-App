@@ -7,26 +7,53 @@ import useSWR from 'swr';
 import { InvoiceContext } from "@/InvoiceContext";
 import { ThemeContext } from "@/ThemeContext";
 import connectDatabase from "@/helpers/db-util";
-import { Router } from "next/router";
+import { useRouter } from "next/router";
+import { useSession, getSession } from "next-auth/react";
 
 export default function InvoicesPage(props) {
   const [showForm, setShowForm] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const { InvoiceData, setInvoiceData } = useContext(InvoiceContext)
   const { theme } = useContext(ThemeContext)
-  
-  useEffect(() => {
-    setInvoiceData({
-      filterStatus: {
-        draft: false,
-        paid: false,
-        pending: false
-      }
+  const router = useRouter();
 
-    })
-  },[])
- 
-  let temp = [];
+    // Redirect away if NOT auth
+  // const [isLoading, setIsLoading] = useState(true);
+  const [loadedSession, setLoadedSession] = useState(true);
+
+  useEffect(()=> {
+    getSession()
+      .then(session => {
+        
+        if (!session) {
+          router.push('/');
+        } else {
+          setIsLoading(false);
+          setInvoiceData({
+            filterStatus: {
+              draft: false,
+              paid: false,
+              pending: false
+            }
+      
+          })
+
+        }
+      })
+  }, [])
+
+  const { session ,status } = useSession();
+  const loading = status === "loading";
+  
+  // useEffect(() => {
+    
+  // },[])
+
+  const { data, error } = useSWR(
+    "/api/invoices/invoices",
+    (url) => fetch(url).then((res) => res.json())
+  ) 
+  
   
   function AddNewInvoice(e) {
     e.preventDefault();
@@ -39,12 +66,9 @@ export default function InvoicesPage(props) {
   }
 
   const [loadedInvoices, setLoadedInvoices] = useState([props.data])
-
-
-  const { data, error } = useSWR(
-    "/api/invoices/invoices",
-    (url) => fetch(url).then((res) => res.json())
-  );
+  
+ 
+  
 
   useEffect(() => {
     if (data) {
@@ -52,15 +76,14 @@ export default function InvoicesPage(props) {
       
       let finalFilteredData = []
       let filteredData;
+      let temp = [];
       
       if (InvoiceData.filterStatus.draft) {
          filteredData = data.result.filter((invoice) => {
           return (invoice.status === "draft")
         })
-        
         finalFilteredData = [...temp, ...filteredData]
         temp = finalFilteredData
-        // console.log(temp, "temp draft")
       }
 
       if (InvoiceData.filterStatus.pending) {
@@ -69,7 +92,6 @@ export default function InvoicesPage(props) {
         })
         finalFilteredData = [...temp, ...filteredData]
         temp = finalFilteredData
-        // console.log(temp, "temp pending")
       }
 
       if (InvoiceData.filterStatus.paid) {
@@ -78,30 +100,17 @@ export default function InvoicesPage(props) {
         })
         finalFilteredData = [...temp, ...filteredData]
         temp = finalFilteredData
-        // console.log(temp, "temp paid")
       }
 
       if (!InvoiceData.filterStatus.paid && !InvoiceData.filterStatus.pending && !InvoiceData.filterStatus.draft) {
         finalFilteredData = data.result
       }
-
-     
-      
-        console.log(finalFilteredData, "finalFilteredData")
+        console.log(finalFilteredData, "finalFilteredData");
         
         setLoadedInvoices(finalFilteredData)
         setIsLoading(false);
-        // console.log(loadedInvoices, "loadedInvoices")
-        // console.log(data.result)
-       
-      
     }
   }, [data, InvoiceData.filterStatus.paid, InvoiceData.filterStatus.draft, InvoiceData.filterStatus.pending])
-
-  // useEffect(() => {
-  //   console.log(loadedInvoices, "loadedInvoices");
-  // }, [loadedInvoices]);
-
 
   //checkboxes 
   const [checked, setChecked] = useState([false, false ,false])
@@ -116,6 +125,10 @@ export default function InvoicesPage(props) {
   if (loadedInvoices.length === 0) {
     return <p>Loading...</p>
   } 
+
+  if (!session) {
+    return <p>Not Authenticated</p>
+  }
 
   return (
     <>

@@ -96,7 +96,7 @@ export default function DetailedInvoicePage(props) {
     return <p>Invoice cannot be found</p>;
   }
 
-  if (!session) {
+  if (!session && status === 'unauthenticated') {
     return <p>Not Authenticated</p>
   }
 

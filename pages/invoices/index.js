@@ -126,7 +126,7 @@ export default function InvoicesPage(props) {
     return <p>Loading...</p>
   } 
 
-  if (!session) {
+  if (!session && status === 'unauthenticated') {
     return <p>Not Authenticated</p>
   }
 

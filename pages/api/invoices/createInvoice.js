@@ -59,17 +59,11 @@ export default async function handler(req, res) {
       let generatedId;
       while(idExists) {
         generatedId = idGenerator();
-        console.log(generatedId)
         idExists = await db.collection("Invoices").findOne({id: generatedId})
-        console.log("idExists: ", idExists)
       }
-  
-      console.log("past while loop", idExists)
 
       req.body.id = generatedId
 
-      console.log("req.body :", req.body)
-      
       const result = await db.collection("Invoices").insertOne(req.body);
         
       res.status(200).json({result})

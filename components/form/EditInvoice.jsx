@@ -5,7 +5,7 @@ import { SaveChanges, SaveDraftButton, SaveSendButton } from "../buttons/Save";
 import DatePicker from "../inputs/DatePicker";
 import PaymentTerms from "../inputs/PaymentTerms";
 import styles from "./EditInvoice.module.css";
-import { addDaysToDate } from "@/helpers/others-util";
+import { addDaysToDate, validateEmail } from "@/helpers/others-util";
 import { Fragment } from "react";
 import { ThemeContext } from "@/ThemeContext";
 
@@ -213,12 +213,7 @@ export default function EditInvoice(props) {
   const [errors, setErrors] = useState({});
 
   function handleSubmit() {
-    function validateEmail(email) {
-      // Regular expression for email validation
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-      return emailRegex.test(email);
-    }
+    
     const errorStreet1 = document.querySelectorAll("." + styles.error)[0];
     const errorCity1 = document.querySelectorAll("." + styles.error)[1];
     const errorPost1 = document.querySelectorAll("." + styles.error)[2];

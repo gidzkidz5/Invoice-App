@@ -9,6 +9,11 @@ html {
     scroll-behavior: smooth;
 }
 
+@media only screen and (min-width: 45em) {
+  html {
+    font-size: 110%;
+  }
+}
 
 h1,
 h2,

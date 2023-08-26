@@ -211,7 +211,7 @@ export default async function handler(req,res) {
           "description": "Logo Re-design",
           "paymentTerms": 7,
           "clientName": "Anita Wainwright",
-          "clientEmail": "",
+          "clientEmail": "aniwain@gmail.com",
           "status": "draft",
           "senderAddress": {
             "street": "19 Union Terrace",
@@ -220,10 +220,10 @@ export default async function handler(req,res) {
             "country": "United Kingdom"
           },
           "clientAddress": {
-            "street": "",
-            "city": "",
-            "postCode": "",
-            "country": ""
+            "street": "3964  Queens Lane",
+            "city": "London",
+            "postCode": "E2 4ET",
+            "country": "United Kingdom"
           },
           "items": [
             {

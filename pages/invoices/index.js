@@ -119,13 +119,14 @@ export default function InvoicesPage(props) {
 
   return (
     <>
+  
       <InvoicePageHeader
         onClick={AddNewInvoice}
         count={loadedInvoices.length}
         onCheckboxChange={handleCheckboxChange}
         theme={theme}
        />
-
+      
       <div className="invoicePage">
         {isLoading ? <p>Loading...</p> : loadedInvoices.map((item, index) => (
           <InvoiceItem
@@ -141,6 +142,7 @@ export default function InvoicesPage(props) {
         ))}
 
         </div>
+       
         <NewInvoice
             show={showForm}
             discardClick={AddNewInvoice}
@@ -446,9 +448,11 @@ export default function InvoicesPage(props) {
           </p>
         </div>
       </div>}
+    
     </>
   );
 }
+
 
 export async function getStaticProps() {
   const client = await connectDatabase();
@@ -458,8 +462,6 @@ export async function getStaticProps() {
   const result = await db.collection("Invoices").find().toArray();
 
   const data = result.map(doc => JSON.parse(JSON.stringify(doc)));
-
-  
   
   return {
     props: {

@@ -12,7 +12,7 @@ function DatePicker(props) {
     return (
     <div className={`${styles.child}`}>
         <label className={`fs-body ff-sanserif ${theme}`} htmlFor='date'>Date</label>
-        <input type="date" className={`${styles.main} ${theme} fs-S2` } 
+        <input type="date" className={`${styles.main} ${theme} fs-S2 ff-sanserif` } 
             min="2018-01-01"
             
             id="date"

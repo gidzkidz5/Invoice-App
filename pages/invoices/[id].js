@@ -121,34 +121,55 @@ export default function DetailedInvoicePage(props) {
   );
 }
 
-export async function getServerSideProps(context) {
-  const invoiceId = context.params.id;
+export async function getStaticPaths() {
+  const client = await connectDatabase();
+  const db = client.db();
+
+  const invoices = await db.collection("Invoices").find({}).toArray();
+
+  const paths = invoices.map((invoice) => ({
+    params: { id: invoice.id.toString() },
+  }));
+
+  return {
+    paths,
+    fallback: false, // Or 'blocking' if you want to use ISR
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const invoiceId = params.id;
 
   const client = await connectDatabase();
-
   const db = client.db();
 
   const result = await db.collection("Invoices").findOne({ id: invoiceId });
 
-  const data = JSON.parse(JSON.stringify(result))
-  
+  const data = JSON.parse(JSON.stringify(result));
 
   return {
     props: {
-      data: data
-    }
-  }
-
-  
-
-  
+      data,
+    },
+  };
 }
-// if (req.method === "GET") {
+
+
+// export async function getServerSideProps(context) {
+//   const invoiceId = context.params.id;
+
+//   const client = await connectDatabase();
+
+//   const db = client.db();
+
 //   const result = await db.collection("Invoices").findOne({ id: invoiceId });
 
-//   //   console.log(result)
-//   if(!result) {
-//       return res.status(404).json({error: "No invoices found"})
-//   } 
-//   res.status(200).json({ result });
-// }
+//   const data = JSON.parse(JSON.stringify(result))
+  
+
+//   return {
+//     props: {
+//       data: data
+//     }
+// }}
+

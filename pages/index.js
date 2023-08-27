@@ -39,6 +39,11 @@ export default function Home() {
       <div className={`ff-sanserif homePage ${theme}`}>
         <h1>Invoices App</h1>
         <InvoiceIcon />
+        <div className="ff-sanserif" id="guestUserText">
+          <p>For guest user please use following credentials</p>
+          <p>user: demo@demo.com</p>
+          <p>password: demo123</p>
+        </div>
         <AuthForm />
       </div>
     </>

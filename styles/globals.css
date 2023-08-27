@@ -26,7 +26,6 @@ picture,
 body {
     margin: 0; 
     padding: 0;
-    
 }
 
 a {
@@ -258,6 +257,15 @@ background:#1E2139
   margin: 0 auto 1em;
   display: inline-block;
   vertical-align: top;
+}
+
+#guestUserText {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap:6px;
+  color:#494E6E;
+  
 }
 
 /*

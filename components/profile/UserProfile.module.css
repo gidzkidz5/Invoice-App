@@ -1,0 +1,18 @@
+.profile {
+  margin: 3rem auto;
+  text-align: center;
+  width: 100%;
+}
+
+.profile h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.profile:global(.light) h1 {
+  color: #0C0E16;
+}
+
+.profile:global(.dark) h1 {
+  color: #FFF;
+}

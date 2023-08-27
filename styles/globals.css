@@ -195,12 +195,14 @@ background:#1E2139
 }
 
 #logout {
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
+  cursor: pointer;
   margin-left: 5px;
 }
 
+
+#login {
+  cursor: pointer;
+}
 #body-main {
   display: flex;
   justify-content: flex-start;

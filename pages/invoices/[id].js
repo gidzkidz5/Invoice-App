@@ -88,7 +88,7 @@ export default function DetailedInvoicePage(props) {
     
   }, [router.query.id]);
 
-  if (!loadedInvoice && !isBlank) {
+  if ((!loadedInvoice && !isBlank) || (!session && status === 'loading')) {
     return <p>Loading...</p>;
   }
 

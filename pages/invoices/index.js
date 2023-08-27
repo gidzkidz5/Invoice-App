@@ -126,6 +126,10 @@ export default function InvoicesPage(props) {
     return <p>Loading...</p>
   } 
 
+  if (!session && status === 'loading') {
+    return <p>Loading.. Checking Auth..</p>
+  }
+
   if (!session && status === 'unauthenticated') {
     return <p>Not Authenticated</p>
   }

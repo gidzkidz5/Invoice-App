@@ -30,6 +30,11 @@ export default function AuthForm() {
   const router = useRouter();
   const { theme } = useContext(ThemeContext);
 
+  const [isLoginError, setIsLoginError] = useState({
+    error: false,
+    message: null
+  })
+
   function switchAuthModeHandler() {
     setIsLogin((prevState) => !prevState);
   }
@@ -52,10 +57,15 @@ export default function AuthForm() {
 
        if (!result.error) {
         //set some auth state
-        router.replace('/invoices')
+        // router.replace('/invoices')
+       } else if (result.error) {
+        setIsLoginError({
+          error: true,
+          message: result.error
+        })
        }
 
-       console.log("hello", result);
+       console.log("auth result", result);
     } else {
       try {
         const result = await createUser(enteredEmail, enteredPassword);
@@ -67,6 +77,7 @@ export default function AuthForm() {
   }
 
   return (
+    <>
     <section className={`${classes.auth} ${theme} ff-sanserif`}>
       <h1>{isLogin ? "Login" : "Sign Up"}</h1>
       <form onSubmit={submitHandler}>
@@ -94,7 +105,10 @@ export default function AuthForm() {
           </button>
         </div>
       </form>
+      {isLoginError.error && <p className={`ff-sanserif fs-S`} style={{color: "#EC5757"}}>{isLoginError.message}</p>}
     </section>
+    
+    </>
   );
 }
 

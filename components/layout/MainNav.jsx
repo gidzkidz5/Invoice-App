@@ -8,6 +8,7 @@ import LoginRoundedIcon from '@mui/icons-material/LoginRounded';
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { Router, useRouter } from "next/router";
+import KeyIcon from '@mui/icons-material/Key';
 
 export default function MainNav() {
   const {theme, switchTheme} = useContext(ThemeContext)
@@ -26,7 +27,11 @@ export default function MainNav() {
   }
 
   function loginHandler() {
-    router.replace('/');
+    router.push('/');
+  }
+
+  function profilePageHandler() {
+    router.push('/profile')
   }
 
 
@@ -98,6 +103,11 @@ export default function MainNav() {
           </div>}
           {!session && !loading && <div id="login" onClick={loginHandler}>
             <LoginRoundedIcon 
+              sx={{color: "#7E88C3"}}
+            />
+          </div>}
+          {session && <div id="profile" onClick={profilePageHandler}>
+          <KeyIcon
               sx={{color: "#7E88C3"}}
             />
           </div>}

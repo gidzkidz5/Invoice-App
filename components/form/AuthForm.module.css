@@ -1,5 +1,5 @@
 .auth {
-  margin: 3rem auto;
+  margin: auto;
   width: 95%;
   max-width: 25rem;
   border-radius: 6px;
@@ -18,6 +18,10 @@
 
 .auth:global(.dark) h1 {
   color: #FFF;
+}
+
+.auth form {
+  margin-bottom: 1.5rem;
 }
 
 .control {

@@ -18,7 +18,7 @@ export default function InvoicesPage(props) {
   const router = useRouter();
 
     // Redirect away if NOT auth
-  // const [isLoading, setIsLoading] = useState(true);
+ 
   const [loadedSession, setLoadedSession] = useState(true);
 
   useEffect(()=> {

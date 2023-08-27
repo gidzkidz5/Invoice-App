@@ -195,13 +195,17 @@ background:#1E2139
 }
 
 #logout {
-  cursor: pointer;
-  margin-left: 5px;
+  margin-left: 4px;
 }
 
-
-#login {
+#login,
+#logout,
+#profile {
   cursor: pointer;
+}
+
+#profile {
+  margin-left: 2px;
 }
 #body-main {
   display: flex;
@@ -245,6 +249,37 @@ background:#1E2139
   color: #FFF;
 }
 
+.loader{
+  margin: 0 0 2em;
+  height: 100px;
+  width: 20%;
+  text-align: center;
+  padding: 1em;
+  margin: 0 auto 1em;
+  display: inline-block;
+  vertical-align: top;
+}
+
+/*
+  Set the color of the icon
+*/
+.loader svg path,
+.loader svg rect{
+  fill: #FF6700;
+}
+
+.homePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 2.5rem;
+}
+
+.homePage.dark {
+  color: #FFF;
+}
+
 /* Tablet */
 @media only screen and (min-width: 35.01em) and (max-width: 64em) {
   #navbar {
@@ -255,6 +290,7 @@ background:#1E2139
     border-radius: 0px 0px 0px 0px;
     flex-direction: row;
     justify-content: space-between;
+    padding-right: 1rem;
   }
 
   #navbar .navlogo svg{
@@ -293,6 +329,7 @@ background:#1E2139
     border-radius: 0px 0px 0px 0px;
     flex-direction: row;
     justify-content: space-between;
+    padding-right: 0.75rem;
   }
 
   #navbar .navlogo svg{

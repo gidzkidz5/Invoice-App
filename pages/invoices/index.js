@@ -44,6 +44,9 @@ export default function InvoicesPage(props) {
 
   const { session ,status } = useSession();
   const loading = status === "loading";
+  console.log("loading variable: ", loading)
+  console.log("session: ", session)
+  console.log("status: ", status)
   
   // useEffect(() => {
     
@@ -126,10 +129,6 @@ export default function InvoicesPage(props) {
     return <p>Loading...</p>
   } 
 
-  if (!session && status === 'loading') {
-    return <p>Loading.. Checking Auth..</p>
-  }
-
   if (!session && status === 'unauthenticated') {
     return <p>Not Authenticated</p>
   }
@@ -145,7 +144,7 @@ export default function InvoicesPage(props) {
        />
       
       <div className="invoicePage">
-        {isLoading ? <p>Loading...</p> : loadedInvoices.map((item, index) => (
+        {(!session && loading) ? <p>Loading...</p> : loadedInvoices.map((item, index) => (
           <InvoiceItem
             key={index}
             id={item.id}

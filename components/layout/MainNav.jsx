@@ -22,7 +22,7 @@ export default function MainNav() {
   const { data: session, status } = useSession()
   const loading = status === "loading"
 
-  function logoutHandler() {
+  async function logoutHandler() {
     signOut();
   }
 

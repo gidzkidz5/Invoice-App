@@ -44,13 +44,9 @@ export default function InvoicesPage(props) {
 
   const { session ,status } = useSession();
   const loading = status === "loading";
-  console.log("loading variable: ", loading)
-  console.log("session: ", session)
-  console.log("status: ", status)
-  
-  // useEffect(() => {
-    
-  // },[])
+  // console.log("loading variable: ", loading)
+  // console.log("session: ", session)
+  // console.log("status: ", status)
 
   const { data, error } = useSWR(
     "/api/invoices/invoices",
@@ -70,9 +66,6 @@ export default function InvoicesPage(props) {
 
   const [loadedInvoices, setLoadedInvoices] = useState([props.data])
   
- 
-  
-
   useEffect(() => {
     if (data) {
       //add filter params here

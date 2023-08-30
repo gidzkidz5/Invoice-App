@@ -19,7 +19,7 @@ export default function DetailedInvoicePage(props) {
  
 
   //session
-  const [isLoading, setIsLoading] = useState(true)
+ 
   const { session, status } = useSession();
   const loading = status === "loading"
 

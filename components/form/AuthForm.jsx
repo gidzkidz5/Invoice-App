@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 
 import classes from "./AuthForm.module.css";
 import { ThemeContext } from "@/ThemeContext";
+import AuthLoader from "../others/AuthLoader";
 
 async function createUser(email, password) {
   const response = await fetch("api/auth/signup", {
@@ -27,6 +28,7 @@ export default function AuthForm() {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const [isLogin, setIsLogin] = useState(true);
+  const [isLoggingIn, setIsLoggingIn] = useState(false)
   const router = useRouter();
   const { theme } = useContext(ThemeContext);
 
@@ -45,10 +47,11 @@ export default function AuthForm() {
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
 
-    //optional: Add validation
+    //could add some front end validation here
 
     if (isLogin) {
       //log user in
+      setIsLoggingIn(true)
       const result = await signIn("credentials", {
         redirect: false,
         email: enteredEmail,
@@ -56,17 +59,18 @@ export default function AuthForm() {
        });
 
        if (!result.error) {
-        //set some auth state
-        // router.replace('/invoices')
+        // setIsLoggingIn(false)
        } else if (result.error) {
         setIsLoginError({
           error: true,
           message: result.error
         })
+        setIsLoggingIn(false)
        }
-
+      
        console.log("auth result", result);
-    } else {
+       setIsLoggingIn(false)
+      } else {
       try {
         const result = await createUser(enteredEmail, enteredPassword);
         console.log(result);
@@ -78,8 +82,14 @@ export default function AuthForm() {
 
   return (
     <>
+     {isLoggingIn && 
+      <>
+      <span>Logging in...</span>
+     <AuthLoader/>
+     </>}
     <section className={`${classes.auth} ${theme} ff-sanserif`}>
       <h1>{isLogin ? "Login" : "Sign Up"}</h1>
+   
       <form onSubmit={submitHandler}>
         <div className={`${classes.control} ${theme}`}>
           <label htmlFor="email">Your Email</label>
@@ -101,6 +111,7 @@ export default function AuthForm() {
             className={classes.toggle}
             onClick={switchAuthModeHandler}
           >
+            
             {isLogin ? "Create new account" : "Login with existing account"}
           </button>
         </div>

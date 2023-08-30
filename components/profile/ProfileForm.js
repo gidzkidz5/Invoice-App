@@ -1,8 +1,10 @@
 import { ThemeContext } from '@/ThemeContext';
 import styles from './ProfileForm.module.css';
 import { useContext, useRef } from 'react';
+import Link from 'next/link';
 
 function ProfileForm(props) {
+  
 
   const oldPasswordRef = useRef();
   const newPasswordRef = useRef();
@@ -25,6 +27,7 @@ function ProfileForm(props) {
 
 
   return (
+    <>
     <form className={`${styles.form} ff-sanserif`} onSubmit={submitHandler}>
       <div className={`${styles.control} ${theme}`}>
         <label htmlFor='new-password'>Old Password</label>
@@ -38,6 +41,7 @@ function ProfileForm(props) {
         <button>Change Password</button>
       </div>
     </form>
+    </>
   );
 }
 

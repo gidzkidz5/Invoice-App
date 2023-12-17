@@ -16,7 +16,7 @@ export default function DetailedInvoice(props) {
 
   const router = useRouter();
   const path = router.query.id;
-  console.log("path", path)
+  
   console.log(props.status.toLowerCase(), "1st");
   const [wantedStatus, setWantedStatus] = useState(props.status.toLowerCase());
 

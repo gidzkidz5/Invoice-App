@@ -59,7 +59,7 @@ export default function DetailedInvoicePage(props) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`/api/invoices/${router.query.id}`);
+        const response = await fetch(`/api/invoices/${router.query.id}`, {cache: 'no-cache' });
 
         if (response.status === 404) {
           //no invoices found

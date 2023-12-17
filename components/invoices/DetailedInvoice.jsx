@@ -8,6 +8,7 @@ import { Fragment, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { ThemeContext } from "@/ThemeContext";
 import Link from "next/link";
+import next from "next";
 
 export default function DetailedInvoice(props) {
   //Theme
@@ -28,13 +29,15 @@ export default function DetailedInvoice(props) {
   }
 
   function handleClick() {
-    changeStatus();
+    changeStatus()    
     console.log(wantedStatus, "wantedStatus");
 
     // router.push(`/invoices/${path}`)
 
     return;
   }
+
+  
 
   useEffect(() => {
     if (wantedStatus !== props.status.toLowerCase()) {
@@ -44,12 +47,12 @@ export default function DetailedInvoice(props) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(wantedStatus),
-      })
+      },{cache: 'no-cache'})
         .then((response) => response.json())
         .then((data) => {
           console.log("inside fetch");
           console.log(data); //Updated resource response
-          router.reload()
+          router.reload(router.asPath)
           // window.location.reload(true);
         })
         .catch((error) => {

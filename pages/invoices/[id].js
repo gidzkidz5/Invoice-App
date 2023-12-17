@@ -141,23 +141,23 @@ export default function DetailedInvoicePage(props) {
   );
 }
 
-export async function getStaticPaths() {
-  const client = await connectDatabase();
-  const db = client.db();
+// export async function getStaticPaths() {
+//   const client = await connectDatabase();
+//   const db = client.db();
 
-  const invoices = await db.collection("Invoices").find({}).toArray();
+//   const invoices = await db.collection("Invoices").find({}).toArray();
 
-  const paths = invoices.map((invoice) => ({
-    params: { id: invoice.id.toString() },
-  }));
+//   const paths = invoices.map((invoice) => ({
+//     params: { id: invoice.id.toString() },
+//   }));
 
-  return {
-    paths,
-    fallback: false, // Or 'blocking' if you want to use ISR
-  };
-}
+//   return {
+//     paths,
+//     fallback: false, // Or 'blocking' if you want to use ISR
+//   };
+// }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const invoiceId = params.id;
 
   const client = await connectDatabase();

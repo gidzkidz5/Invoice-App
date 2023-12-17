@@ -16,7 +16,7 @@ export default function DetailedInvoice(props) {
 
   const router = useRouter();
   const path = router.query.id;
-
+  console.log("path", path)
   console.log(props.status.toLowerCase(), "1st");
   const [wantedStatus, setWantedStatus] = useState(props.status.toLowerCase());
 
@@ -52,8 +52,8 @@ export default function DetailedInvoice(props) {
         .then((data) => {
           console.log("inside fetch");
           console.log(data); //Updated resource response
-          router.reload(path)
-          // window.location.reload(true);
+          // router.reload(path)
+          window.location.reload(true);
         })
         .catch((error) => {
           console.log(error);

@@ -49,7 +49,8 @@ export default function DetailedInvoice(props) {
         .then((data) => {
           console.log("inside fetch");
           console.log(data); //Updated resource response
-          window.location.reload(true);
+          router.reload()
+          // window.location.reload(true);
         })
         .catch((error) => {
           console.log(error);
@@ -103,7 +104,7 @@ export default function DetailedInvoice(props) {
         <section className={`${styles.header} ${theme}`}>
           <div className={`${styles.statusContainer}`}>
             <p className={`fs-body ${styles.grey} ${theme}`}>Status</p>
-            <InvoiceStatus status={props.status} />
+            <InvoiceStatus status={props?.status} />
           </div>
           <div className={`${styles.btnContainer}`}>
             <Edit onClick={props.editOnClick} />

@@ -52,7 +52,7 @@ export default function DetailedInvoice(props) {
         .then((data) => {
           console.log("inside fetch");
           console.log(data); //Updated resource response
-          router.reload(router.asPath)
+          router.reload(path)
           // window.location.reload(true);
         })
         .catch((error) => {
@@ -234,3 +234,4 @@ export default function DetailedInvoice(props) {
     </>
   );
 }
+

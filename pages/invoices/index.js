@@ -24,7 +24,6 @@ export default function InvoicesPage(props) {
   useEffect(()=> {
     getSession()
       .then(session => {
-        
         if (!session) {
           router.push('/');
         } else {
@@ -35,7 +34,6 @@ export default function InvoicesPage(props) {
               paid: false,
               pending: false
             }
-      
           })
 
         }
